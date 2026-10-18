@@ -1,0 +1,6 @@
+{
+  "name": "NaijaVotes 2027 - Nigeria Presidential Mock Election",
+  "description": "Interactive online voting and public sentiment platform for the 2027 Nigerian Presidential Election with real-time zone breakdowns, 25% constitution tracker, and candidate manifestos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
