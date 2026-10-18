@@ -111,6 +111,7 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [isSimulationActive, setIsSimulationActive] = useState<boolean>(false);
   const [selectedZoneFilter, setSelectedZoneFilter] = useState<GeopoliticalZone | 'ALL'>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [activeTab, setActiveTab] = useState<ElectionContextType['activeTab']>('vote');
   const [showVoterSlipModal, setShowVoterSlipModal] = useState<boolean>(false);
   const [customPhotos, setCustomPhotos] = useState<Record<string, string>>(() => {
     try {
@@ -422,7 +423,7 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   return (
     <ElectionContext.Provider
       value={{
-        candidates: CANDIDATES,
+        candidates,
         stateVotes,
         totalNationalVotes,
         candidateTotals,
@@ -448,7 +449,9 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         activeTab,
         setActiveTab,
         showVoterSlipModal,
-        setShowVoterSlipModal
+        setShowVoterSlipModal,
+        updateCandidatePhoto,
+        customPhotos
       }}
     >
       {children}
