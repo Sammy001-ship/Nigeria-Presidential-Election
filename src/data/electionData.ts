@@ -639,23 +639,6 @@ export const CANDIDATES: Candidate[] = [
         details: 'Harness the immense solar irradiance of Northern Nigeria with utility-scale solar parks to power industrial processing clusters.'
       }
     ]
-  },
-  {
-    id: 'chibuzo-okereke',
-    name: 'Chibuzo Okereke',
-    fullName: 'Chibuzo Okereke',
-    party: 'LP',
-    partyFullName: 'Labour Party',
-    partyLogo: 'rose',
-    partyColor: '#b91c1c',
-    secondaryColor: '#008751',
-    photoUrl: '/candidates/chibuzo_okereke_placeholder.svg',
-    slogan: 'Candidate profile pending',
-    bio: 'Additional candidate information has not been provided.',
-    previousOffices: [],
-    manifestoSummary: 'Manifesto details have not been provided.',
-    manifestoPillars: [],
-    policyStances: []
   }
 ];
 

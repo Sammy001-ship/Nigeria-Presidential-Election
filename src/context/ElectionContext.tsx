@@ -59,13 +59,21 @@ const LOCAL_STORAGE_VOTE_KEY = 'naija_votes_2027_user_vote';
 const LOCAL_STORAGE_TALLIES_KEY = 'naija_votes_2027_tallies_v2';
 const LOCAL_STORAGE_COMMENTS_KEY = 'naija_votes_2027_comments';
 const LOCAL_STORAGE_ISSUES_KEY = 'naija_votes_2027_issues';
+const REMOVED_CANDIDATE_ID = 'chibuzo-okereke';
 
 export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Load state votes from storage or initial
   const [stateVotes, setStateVotes] = useState<Record<string, Record<string, number>>>(() => {
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_TALLIES_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const savedTallies: Record<string, Record<string, number>> = JSON.parse(saved);
+        return Object.fromEntries(Object.entries(savedTallies).map(([state, tally]) => {
+          const cleanedTally = { ...tally };
+          delete cleanedTally[REMOVED_CANDIDATE_ID];
+          return [state, cleanedTally];
+        }));
+      }
     } catch {
       // fallback
     }
@@ -76,7 +84,11 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [userVote, setUserVote] = useState<VoteRecord | null>(() => {
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_VOTE_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const vote: VoteRecord = JSON.parse(saved);
+        if (vote.candidateId !== REMOVED_CANDIDATE_ID) return vote;
+        localStorage.removeItem(LOCAL_STORAGE_VOTE_KEY);
+      }
     } catch {
       // fallback
     }
@@ -86,7 +98,10 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [comments, setComments] = useState<Comment[]>(() => {
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_COMMENTS_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const savedComments: Comment[] = JSON.parse(saved);
+        return savedComments.filter(comment => comment.candidateId !== REMOVED_CANDIDATE_ID);
+      }
     } catch {
       // fallback
     }

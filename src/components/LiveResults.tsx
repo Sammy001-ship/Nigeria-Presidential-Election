@@ -182,7 +182,7 @@ export const LiveResults: React.FC = () => {
                         )}
                       </div>
                       <div className="text-xs text-slate-400">
-                        {candidate.partyFullName}{candidate.zone ? ` • ${candidate.zone}` : ''}
+                        {candidate.partyFullName} • {candidate.zone}
                       </div>
                     </div>
                   </div>

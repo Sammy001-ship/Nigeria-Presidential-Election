@@ -134,9 +134,9 @@ export const CandidateProfiles: React.FC = () => {
               </p>
 
               <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400 pt-1">
-                <span>Age: <strong className="text-white">{activeCandidate.age ? `${activeCandidate.age} years` : 'Not provided'}</strong></span>
+                <span>Age: <strong className="text-white">{activeCandidate.age} years</strong></span>
                 <span>•</span>
-                <span>Origin: <strong className="text-white">{activeCandidate.stateOfOrigin || 'Not provided'}</strong>{activeCandidate.zone ? ` (${activeCandidate.zone})` : ''}</span>
+                <span>Origin: <strong className="text-white">{activeCandidate.stateOfOrigin}</strong> ({activeCandidate.zone})</span>
               </div>
             </div>
           </div>
@@ -184,12 +184,12 @@ export const CandidateProfiles: React.FC = () => {
                 <span>Executive Experience & Past Offices</span>
               </div>
               <ul className="space-y-2 text-xs">
-                {activeCandidate.previousOffices.length ? activeCandidate.previousOffices.map((office, idx) => (
+                {activeCandidate.previousOffices.map((office, idx) => (
                   <li key={idx} className="flex items-start gap-2 text-slate-300">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span>
                     <span>{office}</span>
                   </li>
-                )) : <li className="text-slate-400">Candidate details have not been provided.</li>}
+                ))}
               </ul>
             </div>
 
@@ -223,7 +223,7 @@ export const CandidateProfiles: React.FC = () => {
                 Core Manifesto Pillars
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {activeCandidate.manifestoPillars.length ? activeCandidate.manifestoPillars.map((pillar, i) => (
+                {activeCandidate.manifestoPillars.map((pillar, i) => (
                   <div key={i} className="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-1.5 hover:border-slate-700 transition">
                     <div className="flex items-center gap-2">
                       <span className="w-6 h-6 rounded-lg bg-emerald-500/10 text-emerald-400 font-bold text-xs flex items-center justify-center shrink-0">
@@ -235,7 +235,7 @@ export const CandidateProfiles: React.FC = () => {
                       {pillar.description}
                     </p>
                   </div>
-                )) : <p className="text-xs text-slate-400">Manifesto details have not been provided.</p>}
+                ))}
               </div>
             </div>
 
@@ -245,7 +245,7 @@ export const CandidateProfiles: React.FC = () => {
                 Key Policy Positions
               </h4>
               <div className="space-y-3 text-xs">
-                {activeCandidate.policyStances.length ? activeCandidate.policyStances.map((ps, idx) => (
+                {activeCandidate.policyStances.map((ps, idx) => (
                   <div key={idx} className="border-b border-slate-800/80 pb-3 last:border-0 last:pb-0">
                     <div className="flex items-center justify-between text-slate-400 font-semibold mb-1">
                       <span className="text-emerald-400 font-bold">{ps.topic}</span>
@@ -255,7 +255,7 @@ export const CandidateProfiles: React.FC = () => {
                       {ps.details}
                     </p>
                   </div>
-                )) : <p className="text-slate-400">Policy positions have not been provided.</p>}
+                ))}
               </div>
             </div>
           </div>

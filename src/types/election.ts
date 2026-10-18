@@ -17,14 +17,14 @@ export interface Candidate {
   partyColor: string;
   secondaryColor: string;
   photoUrl: string;
-  age?: number;
+  age: number;
   runningMate?: {
     name: string;
     state: string;
     role: string;
   };
-  stateOfOrigin?: string;
-  zone?: GeopoliticalZone;
+  stateOfOrigin: string;
+  zone: GeopoliticalZone;
   slogan: string;
   bio: string;
   previousOffices: string[];

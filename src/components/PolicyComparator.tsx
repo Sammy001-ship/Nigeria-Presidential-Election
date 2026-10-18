@@ -193,12 +193,12 @@ export const PolicyComparator: React.FC = () => {
                     </div>
 
                     <p className="text-xs text-slate-300 leading-relaxed">
-                      {stanceObj?.details || 'Policy details have not been provided.'}
+                      {stanceObj?.details}
                     </p>
                   </div>
 
                   <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-                    <span className="text-slate-500 text-[11px]">{cand.zone || 'Details pending'}</span>
+                    <span className="text-slate-500 text-[11px]">{cand.zone}</span>
                     <button
                       onClick={() => !hasVoted && handleQuickVote(cand.id)}
                       disabled={hasVoted}
