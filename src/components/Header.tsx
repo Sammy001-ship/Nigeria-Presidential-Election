@@ -30,20 +30,39 @@ export const Header: React.FC = () => {
     candidates
   } = useElection();
 
-  // Countdown to February 20, 2027 (approximate Saturday election date)
-  const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; mins: number; secs: number }>({
-    days: 0,
-    hours: 0,
-    mins: 0,
-    secs: 0
+  // Countdown to Election Day (89 days from now)
+  const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; mins: number; secs: number }>(() => {
+    return {
+      days: 89,
+      hours: 14,
+      mins: 0,
+      secs: 0
+    };
   });
 
   useEffect(() => {
-    const electionDate = new Date('2027-02-20T08:00:00+01:00').getTime();
+    const STORAGE_KEY = 'naija_votes_2027_election_target_89d_v1';
+    let targetTime: number;
+
+    const stored = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
+    if (stored) {
+      const parsed = parseInt(stored, 10);
+      const remainingDays = (parsed - Date.now()) / (1000 * 60 * 60 * 24);
+      // Valid if between 0 and 90 days
+      if (!isNaN(parsed) && remainingDays > 0 && remainingDays <= 90) {
+        targetTime = parsed;
+      } else {
+        targetTime = Date.now() + (89 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000);
+        localStorage.setItem(STORAGE_KEY, targetTime.toString());
+      }
+    } else {
+      targetTime = Date.now() + (89 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000);
+      localStorage.setItem(STORAGE_KEY, targetTime.toString());
+    }
 
     const updateTimer = () => {
-      const now = new Date().getTime();
-      const diff = electionDate - now;
+      const now = Date.now();
+      const diff = targetTime - now;
 
       if (diff <= 0) {
         setTimeLeft({ days: 0, hours: 0, mins: 0, secs: 0 });
@@ -93,10 +112,10 @@ export const Header: React.FC = () => {
 
           <div className="flex items-center gap-4">
             {/* Countdown */}
-            <div className="hidden sm:flex items-center gap-1.5 text-slate-300 font-mono text-[11px]">
-              <Clock className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Election Day:</span>
-              <span className="bg-slate-800/80 px-1.5 py-0.5 rounded text-emerald-300 font-bold">
+            <div className="flex items-center gap-1.5 text-slate-300 font-mono text-[11px]">
+              <Clock className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span className="hidden sm:inline">Election Day:</span>
+              <span className="bg-slate-800/90 border border-slate-700/60 px-2 py-0.5 rounded text-emerald-300 font-bold tracking-tight shadow-sm">
                 {timeLeft.days}d {timeLeft.hours}h {timeLeft.mins}m {timeLeft.secs}s
               </span>
             </div>
