@@ -639,6 +639,650 @@ export const CANDIDATES: Candidate[] = [
         details: 'Harness the immense solar irradiance of Northern Nigeria with utility-scale solar parks to power industrial processing clusters.'
       }
     ]
+  },
+  {
+    id: 'okereke',
+    name: 'Chibuzo Okereke',
+    fullName: 'Dr. Chibuzo Okereke',
+    party: 'LP',
+    partyFullName: 'Labour Party (LP)',
+    partyLogo: 'users',
+    partyColor: '#059669', // Emerald Green & Crimson of Labour Party
+    secondaryColor: '#dc2626',
+    photoUrl: '/candidates/chibuzo_okereke_lp.jpg',
+    age: 48,
+    stateOfOrigin: 'Abia State',
+    zone: 'South East',
+    slogan: 'Believe Again: Nigerians First, Restoring Trust & Institutional Renewal',
+    bio: 'Distinguished governance expert, legislative policy strategist, institutional reform advocate, and ratified 2027 presidential candidate of the Labour Party (LP). Former Regional Director for West Africa under the African Union Agenda 2063 Chapter and Legislative Consultant to the House of Representatives Public Accounts Committee. Convener of the National Political Equity Movement.',
+    previousOffices: [
+      'Presidential Candidate, Labour Party (LP)',
+      'Regional Director for West Africa, AU Agenda 2063 Chapter',
+      'Legislative Consultant, House of Representatives Public Accounts Committee',
+      'Convener, National Political Equity Movement'
+    ],
+    manifestoSummary: 'Built on the "Believe Again" blueprint and a "Nigerians First" philosophy: establishing democratic socialism and social justice, revitalizing institutional accountability, expanding youth and artisan livelihoods, securing grassroots agrarian communities, and ensuring qualitative universal public education and healthcare.',
+    manifestoPillars: [
+      {
+        title: 'Democratic Socialism & Social Justice',
+        description: 'Re-align national wealth creation with workers rights, fair minimum wage, dignity of labor, and social protection for vulnerable groups.',
+        icon: 'Scale'
+      },
+      {
+        title: 'Institutional & Legislative Reform',
+        description: 'Overhaul public accountability, strengthen legislative oversight on public expenditure, and eliminate systemic executive leakages.',
+        icon: 'Building2'
+      },
+      {
+        title: 'Nigerians First Economic Stabilization',
+        description: 'Support local manufacturing, SME cooperatives, and agricultural value chains to create sustainable dignity jobs.',
+        icon: 'Coins'
+      },
+      {
+        title: 'Universal Healthcare & Quality Education',
+        description: 'Equip primary healthcare centers across all wards and modernize public basic schools through dedicated education intervention funds.',
+        icon: 'GraduationCap'
+      }
+    ],
+    policyStances: [
+      {
+        topic: 'Economy & Naira',
+        stance: 'Productive Economy & Workers Purchasing Power',
+        details: 'Stabilize the Naira through local productive capacity, targeted credit for artisans and farmers, and curbing speculative currency trading.'
+      },
+      {
+        topic: 'Fuel Subsidy',
+        stance: 'Social Democratic Energy Policy with Transport Cushion',
+        details: 'Guarantee domestic refining self-sufficiency while deploying extensive publicly subsidized transport and clean energy mass transit for workers.'
+      },
+      {
+        topic: 'Security & Policing',
+        stance: 'Multi-Level Community Policing & Institutional Synergy',
+        details: 'Establish well-regulated community and state police units equipped with modern intelligence tools and adequate welfare for frontline personnel.'
+      },
+      {
+        topic: 'Minimum Wage',
+        stance: 'Living Dignity Wage Indexed to Cost of Living',
+        details: 'Enforce a living wage that guarantees workers can afford decent shelter, food, healthcare, and schooling for their families.'
+      },
+      {
+        topic: 'Electricity & Grid',
+        stance: 'Decentralized Clean Energy & Regional Grid Modernization',
+        details: 'Invest in off-grid solar, hydro, and natural gas plants to ensure stable 24/7 power for cottage industries, hospitals, and households.'
+      }
+    ]
+  },
+  {
+    id: 'duke',
+    name: 'Donald Duke',
+    fullName: 'Donald Duke, CON',
+    party: 'PRP',
+    partyFullName: 'People\'s Redemption Party (PRP)',
+    partyLogo: 'key',
+    partyColor: '#dc2626', // Red, White & Black of PRP
+    secondaryColor: '#000000',
+    photoUrl: '/candidates/donald_duke_prp.jpg',
+    age: 64,
+    stateOfOrigin: 'Cross River State',
+    zone: 'South South',
+    slogan: 'Everyone Matters: Creative Economy, Eco-Tourism & Industrial Renaissance',
+    bio: 'Former 2-term Governor of Cross River State (1999–2007) and celebrated visionary leader who transformed Calabar into Nigeria\'s premier tourist and cultural destination. Architect of the landmark Tinapa Business and Leisure Resort, the Obudu Cattle Ranch upgrade, and the Calabar Carnival. Long-standing champion of democratic socialism, human-centered governance, and environmental sustainability under the People\'s Redemption Party.',
+    previousOffices: [
+      'Governor of Cross River State (1999–2007)',
+      'Presidential Candidate, SDP/PRP',
+      'Commissioner for Finance, Cross River State (1992–1993)'
+    ],
+    manifestoSummary: 'Re-engineering Nigeria\'s revenue base through high-value eco-tourism, creative industries, clean agricultural logistics, fiscal devolution, and democratic socialist welfare rooted in Mallam Aminu Kano\'s founding PRP philosophy.',
+    manifestoPillars: [
+      {
+        title: 'Eco-Tourism & Creative Economy',
+        description: 'Unleash Nigeria\'s $30B tourism and entertainment potential through world-class hospitality corridors and visa-on-arrival reforms.',
+        icon: 'Sparkles'
+      },
+      {
+        title: 'Democratic Socialist Welfare',
+        description: 'Implement Mallam Aminu Kano\'s foundational PRP charter: universal public schooling, free emergency healthcare, and affordable urban housing.',
+        icon: 'HeartHandshake'
+      },
+      {
+        title: 'Agro-Logistics & Export Ports',
+        description: 'Connect deep-sea ports with agricultural riverine arteries to position Nigerian produce competitively across global supply chains.',
+        icon: 'Ship'
+      },
+      {
+        title: 'Fiscal Decentralization & Clean Cities',
+        description: 'Reward sub-nationals based on internally generated economic productivity and nationwide municipal sanitation benchmarks.',
+        icon: 'Building'
+      }
+    ],
+    policyStances: [
+      {
+        topic: 'Economy & Naira',
+        stance: 'Diversified Creative & Non-Oil Export Economy',
+        details: 'Harness creative services, intellectual property exports, agricultural processing, and international tourism receipts to build deep foreign reserves.'
+      },
+      {
+        topic: 'Fuel Subsidy',
+        stance: 'Domestic Energy Processing & Clean Transit Subsidies',
+        details: 'Guarantee fair domestic feedstock supplies for all local modular and industrial refineries, redirecting savings into clean urban mass transit.'
+      },
+      {
+        topic: 'Security & Policing',
+        stance: 'Community-Based Modern Homeland Policing',
+        details: 'Modernize policing command structures with decentralized municipal branches, forensics laboratories, and robust human rights training.'
+      },
+      {
+        topic: 'Minimum Wage',
+        stance: 'Living Wage Tied to Municipal Cost of Living Index',
+        details: 'Institute living remuneration that guarantees workers purchasing power against inflation while lowering municipal living costs.'
+      },
+      {
+        topic: 'Electricity & Grid',
+        stance: 'Decentralized Clean Hydro & Natural Gas Independent Power',
+        details: 'Establish state and regional independent power plants (IPPs) drawing on localized hydro, natural gas, and biomass resources.'
+      }
+    ]
+  },
+  {
+    id: 'esther_okereke',
+    name: 'Esther Nkem Okereke',
+    fullName: 'Amb. (Dr.) Esther Nkem Okereke',
+    party: 'NRM',
+    partyFullName: 'National Rescue Movement (NRM)',
+    partyLogo: 'lifebuoy',
+    partyColor: '#2563eb', // Royal Blue & Gold of NRM
+    secondaryColor: '#eab308',
+    photoUrl: '/candidates/esther_okereke_nrm.jpg',
+    age: 42,
+    stateOfOrigin: 'Delta State',
+    zone: 'South South',
+    slogan: 'The ESTHER Agenda: Rescuing Nigeria through Compassion, Enterprise & Inclusivity',
+    bio: 'Dynamic businesswoman, creative media producer, humanitarian philanthropist, and 2027 presidential candidate of the National Rescue Movement (NRM). Widely known as "Dr. NEO", she is the convener of the ESTHER Agenda—a comprehensive socio-economic manifesto designed to rescue Nigeria from economic stagnation, champion female and youth entrepreneurship, revitalize creative industries, and guarantee grassroots social welfare.',
+    previousOffices: [
+      'Presidential Candidate, National Rescue Movement (NRM)',
+      'Convener, The ESTHER Agenda for National Rescue',
+      'Founder, NEO Humanitarian Foundation',
+      'Creative Executive & Business Leader'
+    ],
+    manifestoSummary: 'Executing the ESTHER Agenda: Economic stabilization through SME grants, Security through tech surveillance and community trust, Transparent governance, Healthcare access with zero maternal fees, Education for all children, and Regional agrarian revitalization.',
+    manifestoPillars: [
+      {
+        title: 'The ESTHER Economic Compass',
+        description: 'Empower 10 million female entrepreneurs, market women, and tech innovators with interest-free revolving credit.',
+        icon: 'Coins'
+      },
+      {
+        title: 'Zero Maternal Mortality Healthcare',
+        description: 'Guarantee 100% free prenatal, delivery, and pediatric health coverage across all 774 local government primary clinics.',
+        icon: 'HeartPulse'
+      },
+      {
+        title: 'Creative Industries & Youth Hubs',
+        description: 'Invest $2 Billion into Nigeria\'s booming Nollywood film, music, animation, and digital media production corridors.',
+        icon: 'Film'
+      },
+      {
+        title: 'National Rescue & Anti-Leakage Governance',
+        description: 'Automate federal contracting, eliminate ghost workers, and enforce transparent open budgeting.',
+        icon: 'ShieldCheck'
+      }
+    ],
+    policyStances: [
+      {
+        topic: 'Economy & Naira',
+        stance: 'Grassroots Entrepreneurship & Value-Added Exports',
+        details: 'Support domestic small businesses and light manufacturing to curb import dependence and stabilize the foreign exchange market.'
+      },
+      {
+        topic: 'Fuel Subsidy',
+        stance: 'Targeted Citizens Relief & Mass Transit Subsidies',
+        details: 'Reinvest petroleum deregulated funds into subsidized commuter electric buses and direct transport vouchers for students and workers.'
+      },
+      {
+        topic: 'Security & Policing',
+        stance: 'Tech-Driven Homeland Security & Community Defense',
+        details: 'Integrate drone border reconnaissance with vetted community vigilantes and state police oversight.'
+      },
+      {
+        topic: 'Minimum Wage',
+        stance: 'Dignity Living Wage with Family Nutrition Supplements',
+        details: 'Ensure wages adjust automatically with consumer food indices while providing monthly nutrition supplements for nursing mothers.'
+      },
+      {
+        topic: 'Electricity & Grid',
+        stance: 'Decentralized Clean Solar & Rural Mini-Grids',
+        details: 'Partner with international green climate funds to install solar mini-grids for primary healthcare centers, markets, and cottage processing mills.'
+      }
+    ]
+  },
+  {
+    id: 'kabiru_yusuf',
+    name: 'Kabiru Yusuf',
+    fullName: 'Alh. Kabiru Yusuf',
+    party: 'APP',
+    partyFullName: 'Action Peoples Party (APP)',
+    partyLogo: 'users',
+    partyColor: '#0284c7', // Sky Blue & Orange of Action Peoples Party
+    secondaryColor: '#f97316',
+    photoUrl: '/candidates/kabiru_yusuf_app.jpg',
+    age: 51,
+    stateOfOrigin: 'Bauchi State',
+    zone: 'North East',
+    slogan: 'Action for All: Grassroots Agro-Industrialization, Security & Mass Prosperity',
+    bio: 'Seasoned grassroots political organizer, public administrator, community development champion, and 2027 presidential candidate of the Action Peoples Party (APP). A vocal advocate for agrarian revitalisation, rural youth economic inclusion, pastoral security resolution, and direct local government autonomy across Nigeria.',
+    previousOffices: [
+      'Presidential Candidate, Action Peoples Party (APP)',
+      'National Executive Committee Member, APP',
+      'Community Development Coordinator & Civic Leader'
+    ],
+    manifestoSummary: 'Mobilizing mass grassroots development through nationwide irrigation micro-dams, localized food grain reserves, local council fiscal independence, guaranteed farm security corps, and vocational entrepreneurship credit.',
+    manifestoPillars: [
+      {
+        title: 'Dry-Season Agro-Industrialization',
+        description: 'Build 500 solar-powered irrigation boreholes and earth dams across the Sahel and middle-belt to guarantee two harvest cycles annually.',
+        icon: 'Sprout'
+      },
+      {
+        title: 'Agrarian Rural Security Corps',
+        description: 'Deploy community defense wardens to protect farmers, harvest transport corridors, and rural grazing reserves.',
+        icon: 'ShieldCheck'
+      },
+      {
+        title: 'Total Local Council Autonomy',
+        description: 'Enforce direct allocations to all 774 Local Government Areas, revoking state-joint account deductions.',
+        icon: 'Building'
+      },
+      {
+        title: 'Youth Artisanal & Enterprise Grants',
+        description: 'Provide seed capital and modern equipment to 3 million youth technicians, builders, and agro-processors.',
+        icon: 'Coins'
+      }
+    ],
+    policyStances: [
+      {
+        topic: 'Economy & Naira',
+        stance: 'Food Sovereignty & Rural Commodity Value Addition',
+        details: 'Curtail food import dependency by guaranteeing price floors for domestic grain farmers and processing local produce at source.'
+      },
+      {
+        topic: 'Fuel Subsidy',
+        stance: 'Domestic Energy Supply & Agricultural Transport Cushion',
+        details: 'Mandate domestic crude delivery to local refiners and channel fuel savings into rural agrarian logistics and tractor subsidies.'
+      },
+      {
+        topic: 'Security & Policing',
+        stance: 'Grassroots Community Policing with Local Accountability',
+        details: 'Establish neighborhood and village police commands subordinate to local government councils and vetted by community elders.'
+      },
+      {
+        topic: 'Minimum Wage',
+        stance: 'Living Wage Matched with Rural Food Price Subsidies',
+        details: 'Protect workers living standards while investing in municipal grain reserves to drive down retail food prices nationwide.'
+      },
+      {
+        topic: 'Electricity & Grid',
+        stance: 'Northern Commercial Solar Corridors & Off-Grid Mini-Grids',
+        details: 'Exploit Northern Nigeria\'s abundant sunshine through decentralized solar farm clusters to power cold rooms and agro-mills.'
+      }
+    ]
+  },
+  {
+    id: 'makinde',
+    name: 'Makinde Oluseyi Abiodun',
+    fullName: 'Engr. Oluseyi Abiodun Makinde, FNSE',
+    party: 'APM',
+    partyFullName: 'Allied People\'s Movement (APM)',
+    partyLogo: 'compass',
+    partyColor: '#2563eb', // Royal Blue & Forest Green of APM
+    secondaryColor: '#16a34a',
+    photoUrl: '/candidates/seyi_makinde_apm.jpg',
+    age: 58,
+    stateOfOrigin: 'Oyo State',
+    zone: 'South West',
+    slogan: 'Omituntun 2027: Engineering Modern Nigeria, Sustainable Development & Fiscal Federalism',
+    bio: 'Incumbent 2-term Governor of Oyo State (elected 2019, re-elected 2023), accomplished electrical engineer, oil & gas entrepreneur, and 2027 presidential candidate of the Allied People\'s Movement (APM). Celebrated for the "Omituntun" governance blueprint that revitalized Oyo State\'s infrastructure, maintained prompt monthly 25th-day civil servant salaries, retrieved sole ownership of LAUTECH, constructed the landmark Ibadan circular road, and transformed rural agribusiness.',
+    previousOffices: [
+      'Governor of Oyo State (2019–Present)',
+      'Group Managing Director, Makon Engineering & Technical Services',
+      'Chairman, Omituntun Foundation'
+    ],
+    manifestoSummary: 'Scaling the proven "Omituntun" sustainable development framework nationwide across four core pillars: qualitative education (15-20% budget allocation), accessible healthcare, agricultural expansion through rural farm estates, and engineering-driven critical infrastructure.',
+    manifestoPillars: [
+      {
+        title: 'Engineering Infrastructure Corridors',
+        description: 'Connect agricultural basins to industrial hubs with modern arterial expressways and regional rail networks modeled after the Oyo circular corridor.',
+        icon: 'Hammer'
+      },
+      {
+        title: 'Agribusiness & Farm Estates',
+        description: 'Replicate the Fashola and Eruwa Agribusiness Industrial Hubs across Nigeria to achieve food security and export agro-commodities.',
+        icon: 'Sprout'
+      },
+      {
+        title: 'Human Capital & Education (20% Budget)',
+        description: 'Dedicate up to 20% of federal budget to tuition-free STEM education, teacher welfare, and modern vocational institutes.',
+        icon: 'GraduationCap'
+      },
+      {
+        title: 'Fiscal Federalism & Devolution',
+        description: 'Devolve solid minerals and policing powers to states while strengthening sub-national internally generated revenue (IGR).',
+        icon: 'Scale'
+      }
+    ],
+    policyStances: [
+      {
+        topic: 'Economy & Naira',
+        stance: 'Production-Led Export Diversification & IGR Modernization',
+        details: 'Drive real sector manufacturing and non-oil agro exports while curbing speculative borrowing to strengthen the Naira fundamentally.'
+      },
+      {
+        topic: 'Fuel Subsidy',
+        stance: 'Transparent Energy Transition & Mass Transit Expansion',
+        details: 'Ensure domestic refining output meets national demand and redirect downstream savings into electric/CNG mass transit buses.'
+      },
+      {
+        topic: 'Security & Policing',
+        stance: 'Decentralized State & Regional Policing (Amotekun Model)',
+        details: 'Champion constitutional amendments for state police, drawing on the successful collaborative community security model of Amotekun.'
+      },
+      {
+        topic: 'Minimum Wage',
+        stance: 'Guaranteed Living Wage Paid Promptly',
+        details: 'Enforce timely living wages benchmarked to economic realities, maintaining a spotless record of prompt worker compensation.'
+      },
+      {
+        topic: 'Electricity & Grid',
+        stance: 'State Electricity Markets & Independent Power Projects',
+        details: 'Empower states to establish independent electricity regulatory commissions and off-grid gas-fired power generation plants.'
+      }
+    ]
+  },
+  {
+    id: 'adebisi',
+    name: 'Moses Olusoji Adebisi',
+    fullName: 'Moses Olusoji Adebisi',
+    party: 'DLA',
+    partyFullName: 'Democratic Leadership Alliance (DLA)',
+    partyLogo: 'award',
+    partyColor: '#4338ca', // Indigo & Crimson of DLA
+    secondaryColor: '#dc2626',
+    photoUrl: '/candidates/moses_adebisi_dla.jpg',
+    age: 35,
+    stateOfOrigin: 'Osun State',
+    zone: 'South West',
+    slogan: 'Generational Shift: Technology, Ethical Governance & Economic Transformation',
+    bio: 'Global development strategist, US-based serial entrepreneur, author, and 2027 presidential candidate of the Democratic Leadership Alliance (DLA). At 35 years old, he is the youngest presidential candidate on the official INEC ballot, campaigning on generational change, ethical digital governance, youth inclusion, and transitioning Nigeria from consumption to high-tech production.',
+    previousOffices: [
+      'Presidential Candidate, Democratic Leadership Alliance (DLA)',
+      'Founder & CEO, Global Enterprise Innovations',
+      'Author & Youth Leadership Convener'
+    ],
+    manifestoSummary: 'Driving a generational shift in leadership: modernizing public governance through AI and digital telemetry, building a $15 Billion tech and software venture fund, establishing zero-tariff technology zones across 36 states, and providing interest-free tuition and seed grants for youth startups.',
+    manifestoPillars: [
+      {
+        title: 'Youth Generational Transition',
+        description: 'Dismantle outdated political patronage and institute 50% youth and women representation across federal boards and ministries.',
+        icon: 'Users'
+      },
+      {
+        title: 'Digital & Tech-Driven Economy',
+        description: 'Create 5 million digital jobs in AI, software engineering, fintech, and renewable energy through nationwide LGA tech incubators.',
+        icon: 'Laptop'
+      },
+      {
+        title: 'Ethical & Transparent Governance',
+        description: 'Deploy blockchain-verified federal treasury tracking to eliminate corruption and waste in public procurement.',
+        icon: 'ShieldCheck'
+      },
+      {
+        title: 'Venture Capital & Innovation Fund',
+        description: 'Establish a $15 Billion public-private innovation fund offering non-collateral capital for young founders and manufacturers.',
+        icon: 'Coins'
+      }
+    ],
+    policyStances: [
+      {
+        topic: 'Economy & Naira',
+        stance: 'Tech Export & Modern Knowledge Economy',
+        details: 'Position Nigeria as the digital engineering and software capital of Africa, generating $30B+ in digital service export receipts to strengthen the Naira.'
+      },
+      {
+        topic: 'Fuel Subsidy',
+        stance: 'Clean Tech Transition & Direct Citizens Digital Rebates',
+        details: 'Audit downstream energy completely and distribute direct digital transportation vouchers to students, workers, and gig-economy drivers.'
+      },
+      {
+        topic: 'Security & Policing',
+        stance: 'Autonomous Drone Surveillance & Modern Tactical Police',
+        details: 'Deploy aerial drone surveillance across forest reserves and establish high-tech, well-paid municipal rapid-response units.'
+      },
+      {
+        topic: 'Minimum Wage',
+        stance: 'Living Dignity Wage with Youth Tax Exemptions',
+        details: 'Raise entry-level worker compensation while exempting youth-led micro-enterprises and workers under 30 from federal income tax.'
+      },
+      {
+        topic: 'Electricity & Grid',
+        stance: 'Modular Solar Micro-Grids & Decentralized Clean Energy',
+        details: 'Enable private green utility companies to power university campuses, hospitals, and industrial parks without federal grid bottlenecks.'
+      }
+    ]
+  },
+  {
+    id: 'nwanyanwu',
+    name: 'Nwanyanwu Daniel Daberechukwu',
+    fullName: 'Chief (Barr.) Daniel Daberechukwu Nwanyanwu, OFR',
+    party: 'ZLP',
+    partyFullName: 'Zenith Labour Party (ZLP)',
+    partyLogo: 'briefcase',
+    partyColor: '#dc2626', // Crimson Red & Forest Green of ZLP
+    secondaryColor: '#16a34a',
+    photoUrl: '/candidates/dan_nwanyanwu_zlp.jpg',
+    age: 66,
+    stateOfOrigin: 'Imo State',
+    zone: 'South East',
+    slogan: 'Reclaim Nigeria: Labor Dignity, Production Economy & Rule of Law',
+    bio: 'Distinguished legal practitioner, veteran labor unionist in the banking sector (former National President of NUBIFIE), pioneer founding National Chairman of the Labour Party (2004–2014), and National Chairman and 2027 presidential candidate of the Zenith Labour Party (ZLP). An Officer of the Federal Republic (OFR) and lifelong campaigner for worker rights, judicial independence, and transparent governance.',
+    previousOffices: [
+      'National Chairman, Zenith Labour Party (ZLP)',
+      'Presidential Candidate, ZLP (2023 & 2027)',
+      'Pioneer National Chairman, Labour Party (2004–2014)',
+      'National President, NUBIFIE'
+    ],
+    manifestoSummary: 'Rooted in authentic labor ideology and industrial democracy: implementing a living wage with automatic quarterly inflation adjustments, revamping national rail corridors and state-owned refineries, safeguarding public pensions, and instituting strict criminal accountability for public treasury looters.',
+    manifestoPillars: [
+      {
+        title: 'Frontline Workers Living Dignity',
+        description: 'Guarantee an inflation-indexed living minimum wage, timely pension payments, and worker safety nets across all tiers of government.',
+        icon: 'Briefcase'
+      },
+      {
+        title: 'Industrial & Domestic Refining Sovereignty',
+        description: 'Refurbish Nigeria\'s domestic refineries to 100% capacity and ban export of unprocessed raw solid minerals.',
+        icon: 'Flame'
+      },
+      {
+        title: 'Judicial Integrity & Anti-Corruption',
+        description: 'Establish special fast-track anti-corruption tribunals and remove executive interference from judicial appointments.',
+        icon: 'Scale'
+      },
+      {
+        title: 'National Security & Border Shield',
+        description: 'Upgrade welfare and life insurance for frontline military and police personnel, deploying cutting-edge drone surveillance on international frontiers.',
+        icon: 'ShieldCheck'
+      }
+    ],
+    policyStances: [
+      {
+        topic: 'Economy & Naira',
+        stance: 'Production-Led Industrialization & Local Currency Protection',
+        details: 'Mandate local raw material substitution in factories and end unbacked currency printing to stabilize the purchasing power of working families.'
+      },
+      {
+        topic: 'Fuel Subsidy',
+        stance: 'Refine 100% at Home & Eradicate Import Cartels',
+        details: 'Refine Nigeria\'s crude oil domestically at audited production cost, eliminating the fraudulent cycle of petroleum subsidy imports.'
+      },
+      {
+        topic: 'Security & Policing',
+        stance: 'Integrated Federal-State Multi-Tier Policing',
+        details: 'Support state police structures governed by independent oversight boards to protect local communities from banditry and kidnapping.'
+      },
+      {
+        topic: 'Minimum Wage',
+        stance: 'Living Wage with Guaranteed Pension Integrity',
+        details: 'Ensure monthly wages automatically rise with food inflation and enforce criminal penalties for governors delaying worker pensions.'
+      },
+      {
+        topic: 'Electricity & Grid',
+        stance: 'Public-Private Hybrid Clean Power Corridors',
+        details: 'Decentralize national transmission and concession mini-grids to supply 24/7 dedicated electricity to manufacturing and textile hubs.'
+      }
+    ]
+  },
+  {
+    id: 'sandy_onor',
+    name: 'Onor Sandy Ojang',
+    fullName: 'Prof. Sandy Ojang Onor',
+    party: 'PDP',
+    partyFullName: 'Peoples Democratic Party (PDP)',
+    partyLogo: 'umbrella',
+    partyColor: '#15803d', // Green, White & Red of PDP
+    secondaryColor: '#dc2626',
+    photoUrl: '/candidates/onor_sandy_ojang_pdp.jpg',
+    age: 61,
+    stateOfOrigin: 'Cross River State',
+    zone: 'South South',
+    slogan: 'The Caterpillar Revolution: Academic Excellence, Grassroots Autonomy & Sovereign Prosperity',
+    bio: 'Distinguished Professor of African History, former Senator representing Cross River Central Senatorial District in the 9th National Assembly (2019–2023), former Commissioner for Agriculture and Commissioner for Environment in Cross River State, and 2027 presidential standard-bearer of the Peoples Democratic Party (PDP). Celebrated across the nation as "The Caterpillar" for his irresistible grassroots mobilization, parliamentary acumen, and visionary commitment to LGA fiscal autonomy.',
+    previousOffices: [
+      'Senator of the Federal Republic of Nigeria (Cross River Central, 2019–2023)',
+      'Hon. Commissioner for Environment, Cross River State',
+      'Hon. Commissioner for Agriculture, Cross River State',
+      'Executive Chairman, Etung Local Government Council & National Chairman, ALGON'
+    ],
+    manifestoSummary: 'Rebuilding Nigeria from the grassroots upward: enacting 100% financial and operational autonomy for all 774 Local Government Areas, directing 20% of national expenditure to education and university research, reviving cocoa, palm oil, and agro-allied export corridors, and executing comprehensive environmental restoration across resource-bearing communities.',
+    manifestoPillars: [
+      {
+        title: 'Grassroots & LGA Constitutional Autonomy',
+        description: 'Enforce direct federation account funding to all 774 LGAs, dismantling State-Joint-Local-Government account deductions to power rural infrastructure and grassroots security.',
+        icon: 'Landmark'
+      },
+      {
+        title: 'Agro-Allied Export Revolution',
+        description: 'Establish modern agro-processing hubs along cocoa, oil palm, cassava, and grain belts to create 4 million direct jobs and displace imported foods.',
+        icon: 'Sprout'
+      },
+      {
+        title: 'Education Sovereignty & Academic Welfare',
+        description: 'Dedicate 20% of the federal budget to basic and tertiary education, guaranteeing competitive academic salaries, modern labs, and zero strikes.',
+        icon: 'GraduationCap'
+      },
+      {
+        title: 'Environmental Justice & Delta Restoration',
+        description: 'Enforce stringent ecological cleanups, remediation funds, and fair resource equity for the Niger Delta and mining communities nationwide.',
+        icon: 'ShieldCheck'
+      }
+    ],
+    policyStances: [
+      {
+        topic: 'Economy & Naira',
+        stance: 'Agro-Industrial Value Addition & Fiscal Devolution',
+        details: 'End raw agricultural resource exports; mandate domestic processing for cocoa, cashew, and oil palm to build strong foreign exchange reserves and protect the Naira.'
+      },
+      {
+        topic: 'Fuel Subsidy',
+        stance: 'Modular Refining Expansion & Direct Commuter Relief',
+        details: 'Grant sovereign guarantees to modular and private refineries while investing downstream savings directly into interstate CNG mass transit and agro-haulage rebates.'
+      },
+      {
+        topic: 'Security & Policing',
+        stance: 'Community Multi-Tier Policing & Forest Ranger Shield',
+        details: 'Decentralize police command to state and local levels, partnered with specialized well-armed forest ranger units to purge criminal gangs from rural farming corridors.'
+      },
+      {
+        topic: 'Minimum Wage',
+        stance: 'Living Dignity Wage with Direct LGA Execution',
+        details: 'Implement an inflation-indexed living wage backed by direct treasury disbursements to ensure local council civil servants receive dignified, uninterrupted pay.'
+      },
+      {
+        topic: 'Electricity & Grid',
+        stance: 'Regional Clean Energy Corridors & Hydro Turbines',
+        details: 'License state-backed private generation consortia to build hydro, gas, and solar mini-grids, ending total reliance on the fragile single national grid.'
+      }
+    ]
+  },
+  {
+    id: 'agada',
+    name: 'Peter Ada Agada',
+    fullName: 'Arc. (Dr.) Peter Ada Agada, fnia',
+    party: 'YPP',
+    partyFullName: 'Young Progressives Party (YPP)',
+    partyLogo: 'sprout',
+    partyColor: '#2563eb', // Royal Blue & Gold of YPP
+    secondaryColor: '#f59e0b',
+    photoUrl: '/candidates/peter_ada_agada_ypp.jpg',
+    age: 55,
+    stateOfOrigin: 'Benue State',
+    zone: 'North Central',
+    slogan: 'Nigeria As A Project Site: Precision Architecture, Direct Labor & Transparent Governance',
+    bio: 'Renowned architect, infrastructure policy strategist, acoustic design specialist, and 2027 presidential standard-bearer of the Young Progressives Party (YPP). Hailing from Ogbadibo Local Government Area of Benue State with degrees from the University of Jos and advanced doctorate credentials in Acoustics & C4ISR Spectrum Management, he previously served as Director of Finance of the Obidient Movement and lead economic policy writer for the 2023 Consumption-to-Production agenda. He champions "Governance with GPS"—managing Nigeria\'s public works with rigorous engineering milestones, direct labor, and citizen-accessible transparency.',
+    previousOffices: [
+      'Presidential Candidate, Young Progressives Party (YPP)',
+      'Principal Partner & Lead Architect, APEX Architecture & Design Consortium',
+      'Director of Finance, Obidient Movement & Lead Economic Policy Drafter (2023)',
+      'National Policy Consultant on Direct Labor Public Works & LGA Infrastructure'
+    ],
+    manifestoSummary: 'Transforming Nigeria into a high-performance national project site: executing capital infrastructure through direct labor to employ millions of youth artisans, deploying geospatial GPS and drone telemetry to eliminate ghost contracts, retaining downstream energy deregulation while channeling savings into domestic refining and mass transit, and building decentralized renewable micro-grids across agro-industrial corridors.',
+    manifestoPillars: [
+      {
+        title: 'Direct Labor Infrastructure Revolution',
+        description: 'Bypass parasitic contract kickbacks by deploying direct labor on federal roads, clinics, and schools, paying dignified wages directly to local artisans and engineers.',
+        icon: 'Hammer'
+      },
+      {
+        title: '"Governance with GPS" Milestone Telemetry',
+        description: 'Institute open-source satellite and drone telemetry for all public capital allocations, giving every citizen real-time project delivery dashboards.',
+        icon: 'Compass'
+      },
+      {
+        title: 'Benue-Niger Basin Agro-Industrial Architecture',
+        description: 'Construct state-of-the-art cold-chain logistics hubs and food processing parks across Benue, Middle Belt, and northern agricultural basins.',
+        icon: 'Sprout'
+      },
+      {
+        title: 'C4ISR Technology-Driven Border Defense',
+        description: 'Deploy electronic spectrum surveillance, automated sensor towers, and tactical drones to secure agricultural farmlands and highways from terrorists.',
+        icon: 'ShieldCheck'
+      }
+    ],
+    policyStances: [
+      {
+        topic: 'Economy & Naira',
+        stance: 'Direct Labor Capital Works & Import-Substitution',
+        details: 'Slash public procurement inflation by 40% using direct labor engineering, directing foreign exchange savings into domestic machinery and agrarian export production to strengthen the Naira.'
+      },
+      {
+        topic: 'Fuel Subsidy',
+        stance: 'Deregulation with Local Refining & Direct Commuter Rebates',
+        details: 'Retain deregulated downstream pricing while mandating local crude sales to private and modular refineries in Naira, accompanied by nationwide direct CNG commuter vouchers.'
+      },
+      {
+        topic: 'Security & Policing',
+        stance: 'C4ISR Sensor Networks & Decentralized Community Guards',
+        details: 'Leverage electromagnetic spectrum management, drone perimeter sensors, and decentralized community policing to secure agricultural belts and transport highways from bandits.'
+      },
+      {
+        topic: 'Minimum Wage',
+        stance: 'Productivity-Linked Living Wage & Artisan Dignity Pay',
+        details: 'Institute an enforceable living minimum wage with standardized daily-wage protections for construction artisans and gig workers across the federation.'
+      },
+      {
+        topic: 'Electricity & Grid',
+        stance: 'Decentralized Architecture & Regional Smart Micro-Grids',
+        details: 'Treat electric power as localized infrastructure: build solar-gas hybrid micro-grids for industrial clusters, cutting reliance on the vulnerable national grid.'
+      }
+    ]
   }
 ];
 
@@ -706,60 +1350,14 @@ export const GEOPOLITICAL_ZONES: { name: GeopoliticalZone; states: string[]; col
   { name: 'Diaspora', states: ['Diaspora Voters'], color: '#6366f1' }
 ];
 
-// Realistic baseline vote tallies simulating broad national sample (approx ~185,000 total baseline votes)
-export const INITIAL_STATE_VOTES: Record<string, Record<string, number>> = {
-  // South West (Tinubu strong, Obi competitive in Lagos urban, Atiku secondary)
-  'Lagos': { tinubu: 4620, obi: 4190, atiku: 920, okwori: 380, sowore: 540, omoaje: 610 },
-  'Oyo': { tinubu: 3100, obi: 1650, atiku: 1200, okwori: 240, sowore: 310, omoaje: 280 },
-  'Ogun': { tinubu: 2850, obi: 1420, atiku: 880, okwori: 180, sowore: 220, omoaje: 260 },
-  'Osun': { tinubu: 2410, obi: 1390, atiku: 1620, okwori: 130, sowore: 190, omoaje: 210 },
-  'Ondo': { tinubu: 2530, obi: 1280, atiku: 890, okwori: 140, sowore: 810, omoaje: 190 },
-  'Ekiti': { tinubu: 2180, obi: 980, atiku: 720, okwori: 90, sowore: 140, omoaje: 160 },
-
-  // South East (Obi overwhelmingly dominant)
-  'Anambra': { tinubu: 410, obi: 6850, atiku: 380, okwori: 70, sowore: 110, omoaje: 450 },
-  'Enugu': { tinubu: 380, obi: 5420, atiku: 420, okwori: 60, sowore: 90, omoaje: 390 },
-  'Imo': { tinubu: 620, obi: 4980, atiku: 510, okwori: 90, sowore: 120, omoaje: 380 },
-  'Abia': { tinubu: 490, obi: 5110, atiku: 440, okwori: 70, sowore: 80, omoaje: 340 },
-  'Ebonyi': { tinubu: 890, obi: 3820, atiku: 610, okwori: 80, sowore: 70, omoaje: 290 },
-
-  // South South (Obi, Atiku, and Tinubu competitive, Okonjo-Iweala high respect)
-  'Rivers': { tinubu: 2750, obi: 3920, atiku: 1820, okwori: 210, sowore: 310, omoaje: 780 },
-  'Delta': { tinubu: 1840, obi: 3610, atiku: 2790, okwori: 160, sowore: 250, omoaje: 920 },
-  'Edo': { tinubu: 2210, obi: 3450, atiku: 1920, okwori: 140, sowore: 280, omoaje: 510 },
-  'Akwa Ibom': { tinubu: 1620, obi: 2890, atiku: 2650, okwori: 110, sowore: 170, omoaje: 460 },
-  'Cross River': { tinubu: 1890, obi: 2710, atiku: 1780, okwori: 90, sowore: 160, omoaje: 410 },
-  'Bayelsa': { tinubu: 1210, obi: 1950, atiku: 1890, okwori: 80, sowore: 110, omoaje: 310 },
-
-  // North West (Kwankwaso dominant in Kano, Tinubu strong in Katsina/Kaduna/Jigawa, Atiku competitive)
-  'Kano': { tinubu: 2840, obi: 980, atiku: 1920, okwori: 6720, sowore: 150, omoaje: 290 },
-  'Kaduna': { tinubu: 2980, obi: 3120, atiku: 3250, okwori: 1890, sowore: 210, omoaje: 380 },
-  'Katsina': { tinubu: 3820, obi: 410, atiku: 3450, okwori: 1640, sowore: 90, omoaje: 140 },
-  'Jigawa': { tinubu: 3120, obi: 320, atiku: 2680, okwori: 1420, sowore: 70, omoaje: 110 },
-  'Sokoto': { tinubu: 2850, obi: 340, atiku: 2980, okwori: 780, sowore: 60, omoaje: 120 },
-  'Kebbi': { tinubu: 2740, obi: 280, atiku: 2610, okwori: 650, sowore: 50, omoaje: 140 },
-  'Zamfara': { tinubu: 2610, obi: 240, atiku: 2540, okwori: 590, sowore: 40, omoaje: 90 },
-
-  // North East (Atiku strong home base, Tinubu strong in Borno/Yobe via Shettima)
-  'Adamawa': { tinubu: 1420, obi: 890, atiku: 4890, okwori: 480, sowore: 110, omoaje: 260 },
-  'Borno': { tinubu: 4520, obi: 410, atiku: 1890, okwori: 520, sowore: 90, omoaje: 180 },
-  'Bauchi': { tinubu: 2420, obi: 620, atiku: 3510, okwori: 1210, sowore: 80, omoaje: 160 },
-  'Yobe': { tinubu: 3280, obi: 290, atiku: 1650, okwori: 410, sowore: 60, omoaje: 110 },
-  'Taraba': { tinubu: 1410, obi: 1980, atiku: 2840, okwori: 390, sowore: 90, omoaje: 220 },
-  'Gombe': { tinubu: 2120, obi: 540, atiku: 2690, okwori: 810, sowore: 70, omoaje: 130 },
-
-  // North Central (Battleground: Obi, Tinubu, Atiku all strong)
-  'FCT Abuja': { tinubu: 2310, obi: 4620, atiku: 1420, okwori: 480, sowore: 420, omoaje: 890 },
-  'Plateau': { tinubu: 1720, obi: 3840, atiku: 2110, okwori: 310, sowore: 180, omoaje: 410 },
-  'Benue': { tinubu: 2410, obi: 2980, atiku: 1840, okwori: 210, sowore: 140, omoaje: 290 },
-  'Nasarawa': { tinubu: 1980, obi: 2820, atiku: 1890, okwori: 420, sowore: 120, omoaje: 240 },
-  'Kogi': { tinubu: 2950, obi: 1640, atiku: 1810, okwori: 260, sowore: 130, omoaje: 210 },
-  'Kwara': { tinubu: 2820, obi: 1410, atiku: 2010, okwori: 240, sowore: 160, omoaje: 250 },
-  'Niger': { tinubu: 3210, obi: 1120, atiku: 2240, okwori: 620, sowore: 110, omoaje: 190 },
-
-  // Diaspora (Obi, Okonjo-Iweala, Sowore prominent)
-  'Diaspora Voters': { tinubu: 1450, obi: 6420, atiku: 1120, okwori: 310, sowore: 1280, omoaje: 1940 }
-};
+// Baseline vote tallies strictly start from zero across all Nigerian states and candidates
+export const INITIAL_STATE_VOTES: Record<string, Record<string, number>> = NIGERIAN_STATES.reduce((acc, state) => {
+  acc[state.name] = CANDIDATES.reduce((cAcc, cand) => {
+    cAcc[cand.id] = 0;
+    return cAcc;
+  }, {} as Record<string, number>);
+  return acc;
+}, {} as Record<string, Record<string, number>>);
 
 export const INITIAL_COMMENTS: Comment[] = [
   {
@@ -769,7 +1367,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'obi',
     content: 'Obi Peter Gregory represents fiscal prudence and genuine production. His track record in Anambra speaks for itself—no pension arrears, left billions in reserves. NDC all the way!',
     timestamp: '15 mins ago',
-    likes: 42,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -779,7 +1377,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'okwori',
     content: 'Ada Elizabeth Fredrick Okwori represents true grassroots compassion, agro-allied innovation, and women empowerment. Her plans for cold-storage hubs and maternal healthcare will revitalize middle-belt farming families. NDP all the way!',
     timestamp: '28 mins ago',
-    likes: 31,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -789,7 +1387,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'tinubu',
     content: 'President Tinubu took the tough, bold decisions that previous leaders dodged for 30 years (subsidy removal and FX unification). The Lagos-Calabar coastal road and NELFUND student loans show long-term vision. Let him consolidate.',
     timestamp: '42 mins ago',
-    likes: 27,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -799,7 +1397,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'atiku',
     content: 'Atiku has always championed restructuring and private enterprise. The federal government has too much power concentrated in Abuja. Devolution to states and state police is the only lasting solution to our security and economic woes.',
     timestamp: '1 hour ago',
-    likes: 19,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -809,7 +1407,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'sowore',
     content: 'Sowore is the only one who consistently stands with ordinary workers and student unions without compromising with the political elite. ₦250k minimum wage and free healthcare is what true democracy looks like!',
     timestamp: '2 hours ago',
-    likes: 24,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -819,17 +1417,107 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'omoaje',
     content: 'Adekunle Rufai Omoaje has championed grassroots democracy and local government autonomy for decades. The Action Alliance platform for youth vocational skills and cottage industrialization will transform our communities!',
     timestamp: '3 hours ago',
-    likes: 38,
+    likes: 0,
+    isVerifiedVoter: true
+  },
+  {
+    id: 'c7',
+    author: 'Ngozi Okoli',
+    state: 'Abia',
+    candidateId: 'okereke',
+    content: 'Dr. Chibuzo Okereke brings deep legislative governance and institutional integrity to the table. His "Believe Again" blueprint prioritizes workers rights, educational investment, and real accountability. Labour Party (LP) forward!',
+    timestamp: '15 mins ago',
+    likes: 0,
+    isVerifiedVoter: true
+  },
+  {
+    id: 'c8',
+    author: 'Effiom Bassey',
+    state: 'Cross River',
+    candidateId: 'duke',
+    content: 'Donald Duke proved what good governance looks like in Cross River: clean cities, the Calabar Carnival, and Tinapa. Under the historic People\'s Redemption Party (PRP), he brings the exact visionary, creative leadership Nigeria needs to diversify from oil!',
+    timestamp: '8 mins ago',
+    likes: 0,
+    isVerifiedVoter: true
+  },
+  {
+    id: 'c9',
+    author: 'Blessing Efe',
+    state: 'Delta',
+    candidateId: 'esther_okereke',
+    content: 'Amb. Esther Nkem Okereke ("Dr. NEO") represents real female leadership and compassion. Her ESTHER Agenda for maternal healthcare, creative industry investment, and micro-loans for market women is inspiring grassroots Nigerians nationwide under NRM!',
+    timestamp: '5 mins ago',
+    likes: 0,
+    isVerifiedVoter: true
+  },
+  {
+    id: 'c10',
+    author: 'Usman Danladi',
+    state: 'Bauchi',
+    candidateId: 'kabiru_yusuf',
+    content: 'Alhaji Kabiru Yusuf is a true grassroots champion of the masses. His Action Peoples Party (APP) blueprint for solar irrigation dams and farmer security will restore food security and prosperity to Northern communities and across the federation!',
+    timestamp: '2 mins ago',
+    likes: 0,
+    isVerifiedVoter: true
+  },
+  {
+    id: 'c11',
+    author: 'Engr. Taiwo Ogundipe',
+    state: 'Oyo',
+    candidateId: 'makinde',
+    content: 'Governor Seyi Makinde has proven what engineering precision and financial prudence can do in governance. From prompt 25th salary dates and sole LAUTECH ownership to the Ibadan Circular road and agribusiness hubs, his APM candidacy offers Nigeria tested administrative brilliance!',
+    timestamp: 'Just now',
+    likes: 0,
+    isVerifiedVoter: true
+  },
+  {
+    id: 'c12',
+    author: 'Olamide Adeleke',
+    state: 'Lagos',
+    candidateId: 'adebisi',
+    content: 'At 35, Moses Olusoji Adebisi represents the authentic energy and tech-forward mind of Nigeria\'s youth population. His Democratic Leadership Alliance (DLA) agenda for digital venture capital, ethical AI governance, and youth leadership quotas is the generational shift Nigeria desperately needs!',
+    timestamp: 'Just now',
+    likes: 0,
+    isVerifiedVoter: true
+  },
+  {
+    id: 'c13',
+    author: 'Emeka Onyekwelu',
+    state: 'Imo',
+    candidateId: 'nwanyanwu',
+    content: 'Chief Dan Nwanyanwu has fought on the frontline for workers\' rights and pension dignity his entire life. From pioneer leadership in the labor movement to the Zenith Labour Party (ZLP), his commitment to domestic refining, honest judiciary, and industrial democracy is unwavering!',
+    timestamp: 'Just now',
+    likes: 0,
+    isVerifiedVoter: true
+  },
+  {
+    id: 'c14',
+    author: 'Ntufam Ntui Etta',
+    state: 'Cross River',
+    candidateId: 'sandy_onor',
+    content: 'Prof. Sandy Ojang Onor ("The Caterpillar") represents authentic grassroots power and academic brilliance. As former Senator, ALGON leader, and Commissioner, his fight for 100% LGA autonomy and agro-allied export corridors under PDP will rebuild Nigeria from the local councils up!',
+    timestamp: 'Just now',
+    likes: 0,
+    isVerifiedVoter: true
+  },
+  {
+    id: 'c15',
+    author: 'Oche Godwin',
+    state: 'Benue',
+    candidateId: 'agada',
+    content: 'Arc. Peter Ada Agada is an infrastructure visionary! His "Nigeria As A Project Site" blueprint and direct labor methodology will put government project funds directly into the pockets of youth artisans and engineers, while cutting out corrupt middlemen under the YPP banner.',
+    timestamp: 'Just now',
+    likes: 0,
     isVerifiedVoter: true
   }
 ];
 
 export const TOP_ISSUES_POLL: IssuePollOption[] = [
-  { id: 'economy', title: 'Naira Stability & Inflation', description: 'Tackling hyper-inflation, food prices, and stabilizing exchange rates.', votes: 4120, icon: 'TrendingDown' },
-  { id: 'security', title: 'Security & Banditry / State Police', description: 'Halting kidnapping, farmer-herder clashes, and securing agrarian belts.', votes: 3680, icon: 'Shield' },
-  { id: 'jobs', title: 'Youth Unemployment & Living Wage', description: 'Creating tech/industrial jobs and paying a fair living wage.', votes: 2940, icon: 'Briefcase' },
-  { id: 'power', title: '24/7 Electricity & Refineries', description: 'Ending national grid collapse and refining crude oil locally.', votes: 2510, icon: 'Zap' },
-  { id: 'corruption', title: 'Cost of Governance & Corruption', description: 'Cutting wasteful elite spending, luxury convoys, and looting.', votes: 3190, icon: 'DollarSign' }
+  { id: 'economy', title: 'Naira Stability & Inflation', description: 'Tackling hyper-inflation, food prices, and stabilizing exchange rates.', votes: 0, icon: 'TrendingDown' },
+  { id: 'security', title: 'Security & Banditry / State Police', description: 'Halting kidnapping, farmer-herder clashes, and securing agrarian belts.', votes: 0, icon: 'Shield' },
+  { id: 'jobs', title: 'Youth Unemployment & Living Wage', description: 'Creating tech/industrial jobs and paying a fair living wage.', votes: 0, icon: 'Briefcase' },
+  { id: 'power', title: '24/7 Electricity & Refineries', description: 'Ending national grid collapse and refining crude oil locally.', votes: 0, icon: 'Zap' },
+  { id: 'corruption', title: 'Cost of Governance & Corruption', description: 'Cutting wasteful elite spending, luxury convoys, and looting.', votes: 0, icon: 'DollarSign' }
 ];
 
 export const MATCHMAKER_QUIZ: QuizQuestion[] = [

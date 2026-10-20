@@ -13,7 +13,10 @@ import {
   Radio, 
   RefreshCw,
   Award,
-  FileCheck
+  FileCheck,
+  Activity,
+  Lock,
+  Unlock
 } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -27,23 +30,46 @@ export const Header: React.FC = () => {
     setShowVoterSlipModal,
     isSimulationActive,
     toggleSimulation,
-    candidates
+    candidates,
+    analytics,
+    isAdminAuthenticated,
+    lockAdmin,
+    setAdminAuthModalOpen
   } = useElection();
 
-  // Countdown to February 20, 2027 (approximate Saturday election date)
-  const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; mins: number; secs: number }>({
-    days: 0,
-    hours: 0,
-    mins: 0,
-    secs: 0
+  // Countdown to Election Day (89 days from now)
+  const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; mins: number; secs: number }>(() => {
+    return {
+      days: 89,
+      hours: 14,
+      mins: 0,
+      secs: 0
+    };
   });
 
   useEffect(() => {
-    const electionDate = new Date('2027-02-20T08:00:00+01:00').getTime();
+    const STORAGE_KEY = 'naija_votes_2027_election_target_89d_v1';
+    let targetTime: number;
+
+    const stored = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
+    if (stored) {
+      const parsed = parseInt(stored, 10);
+      const remainingDays = (parsed - Date.now()) / (1000 * 60 * 60 * 24);
+      // Valid if between 0 and 90 days
+      if (!isNaN(parsed) && remainingDays > 0 && remainingDays <= 90) {
+        targetTime = parsed;
+      } else {
+        targetTime = Date.now() + (89 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000);
+        localStorage.setItem(STORAGE_KEY, targetTime.toString());
+      }
+    } else {
+      targetTime = Date.now() + (89 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000);
+      localStorage.setItem(STORAGE_KEY, targetTime.toString());
+    }
 
     const updateTimer = () => {
-      const now = new Date().getTime();
-      const diff = electionDate - now;
+      const now = Date.now();
+      const diff = targetTime - now;
 
       if (diff <= 0) {
         setTimeLeft({ days: 0, hours: 0, mins: 0, secs: 0 });
@@ -63,7 +89,7 @@ export const Header: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const navItems = [
+  const publicNavItems = [
     { id: 'vote', label: 'Cast Ballot', icon: Vote, highlight: !hasVoted },
     { id: 'results', label: 'Live Results', icon: BarChart3 },
     { id: 'map', label: 'Zones & States', icon: MapPin },
@@ -72,6 +98,10 @@ export const Header: React.FC = () => {
     { id: 'quiz', label: 'Matchmaker', icon: HelpCircle },
     { id: 'townhall', label: 'Town Hall', icon: MessageSquare }
   ] as const;
+
+  const navItems = isAdminAuthenticated
+    ? [...publicNavItems, { id: 'admin' as const, label: 'Live Telemetry', icon: Activity }]
+    : publicNavItems;
 
   const votedCandidate = hasVoted ? candidates.find(c => c.id === userVote?.candidateId) : null;
 
@@ -91,12 +121,31 @@ export const Header: React.FC = () => {
             </span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Live Online Badge */}
+            <button
+              onClick={() => {
+                if (isAdminAuthenticated) {
+                  setActiveTab('admin');
+                } else {
+                  setAdminAuthModalOpen(true);
+                }
+              }}
+              title="Live Telemetry"
+              className="flex items-center gap-1.5 text-slate-300 hover:text-emerald-300 font-mono text-[11px] bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 px-2 py-0.5 rounded transition cursor-pointer"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span>{analytics.currentlyOnline.toLocaleString()} Online</span>
+            </button>
+
             {/* Countdown */}
-            <div className="hidden sm:flex items-center gap-1.5 text-slate-300 font-mono text-[11px]">
-              <Clock className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Election Day:</span>
-              <span className="bg-slate-800/80 px-1.5 py-0.5 rounded text-emerald-300 font-bold">
+            <div className="flex items-center gap-1.5 text-slate-300 font-mono text-[11px]">
+              <Clock className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <span className="hidden sm:inline">Election Day:</span>
+              <span className="bg-slate-800/90 border border-slate-700/60 px-2 py-0.5 rounded text-emerald-300 font-bold tracking-tight shadow-sm">
                 {timeLeft.days}d {timeLeft.hours}h {timeLeft.mins}m {timeLeft.secs}s
               </span>
             </div>
@@ -114,6 +163,36 @@ export const Header: React.FC = () => {
               <Radio className="w-3 h-3 text-emerald-400" />
               <span>Live Ticker: {isSimulationActive ? 'Active' : 'Paused'}</span>
             </button>
+
+            {/* Discrete Portal access trigger */}
+            {isAdminAuthenticated ? (
+              <div className="flex items-center gap-1 bg-emerald-950/70 border border-emerald-700/60 rounded px-1.5 py-0.5">
+                <button
+                  onClick={() => setActiveTab('admin')}
+                  className="flex items-center gap-1 text-[11px] text-emerald-300 hover:text-white font-semibold"
+                  title="Telemetry Portal (Unlocked)"
+                >
+                  <Unlock className="w-3 h-3 text-emerald-400" />
+                  <span>Portal</span>
+                </button>
+                <button
+                  onClick={lockAdmin}
+                  className="text-[10px] text-slate-400 hover:text-red-400 ml-1 pl-1 border-l border-slate-700"
+                  title="Lock Session"
+                >
+                  Lock
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setAdminAuthModalOpen(true)}
+                title="System Gate"
+                aria-label="System Gate"
+                className="flex items-center justify-center p-1 sm:px-1.5 sm:py-0.5 rounded bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 text-slate-400 hover:text-emerald-300 transition"
+              >
+                <Lock className="w-3 h-3 text-slate-400" />
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -229,6 +308,11 @@ export const Header: React.FC = () => {
                 {item.id === 'vote' && hasVoted && (
                   <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-800/80 text-emerald-200">
                     Voted
+                  </span>
+                )}
+                {item.id === 'admin' && (
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-950/80 text-emerald-300 font-mono font-bold border border-emerald-500/30">
+                    Live
                   </span>
                 )}
               </button>

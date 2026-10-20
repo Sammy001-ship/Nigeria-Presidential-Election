@@ -44,7 +44,7 @@ export const GeopoliticalAnalysis: React.FC = () => {
 
       // Find leader
       let leaderId = '';
-      let maxVotes = -1;
+      let maxVotes = 0;
       Object.entries(zoneCandidateVotes).forEach(([cId, count]) => {
         if (count > maxVotes) {
           maxVotes = count;
@@ -52,7 +52,7 @@ export const GeopoliticalAnalysis: React.FC = () => {
         }
       });
 
-      const leader = candidates.find(c => c.id === leaderId);
+      const leader = zoneTotal > 0 && maxVotes > 0 ? candidates.find(c => c.id === leaderId) : undefined;
       const leaderShare = zoneTotal > 0 ? (maxVotes / zoneTotal) * 100 : 0;
 
       return {
@@ -133,13 +133,17 @@ export const GeopoliticalAnalysis: React.FC = () => {
 
                 <div className="mt-2 pt-2 border-t border-slate-800/80">
                   <div className="text-[9px] uppercase font-bold text-slate-500">Leading:</div>
-                  <div className="text-xs font-extrabold text-emerald-400 truncate flex items-center gap-1">
-                    <span 
-                      className="w-2 h-2 rounded-full inline-block"
-                      style={{ backgroundColor: zone.leader?.partyColor }}
-                    ></span>
-                    <span>{zone.leader?.party} ({zone.leaderShare.toFixed(0)}%)</span>
-                  </div>
+                  {zone.leader ? (
+                    <div className="text-xs font-extrabold text-emerald-400 truncate flex items-center gap-1">
+                      <span 
+                        className="w-2 h-2 rounded-full inline-block"
+                        style={{ backgroundColor: zone.leader.partyColor }}
+                      ></span>
+                      <span>{zone.leader.party} ({zone.leaderShare.toFixed(0)}%)</span>
+                    </div>
+                  ) : (
+                    <div className="text-[10px] text-slate-500 font-normal">Awaiting ballots</div>
+                  )}
                 </div>
               </button>
             );
@@ -189,7 +193,7 @@ export const GeopoliticalAnalysis: React.FC = () => {
 
           // Find leader in this state
           let leaderId = '';
-          let maxVotes = -1;
+          let maxVotes = 0;
           Object.entries(sVotes).forEach(([cId, count]) => {
             if (count > maxVotes) {
               maxVotes = count;
@@ -197,7 +201,7 @@ export const GeopoliticalAnalysis: React.FC = () => {
             }
           });
 
-          const leader = candidates.find(c => c.id === leaderId);
+          const leader = totalStateVotes > 0 && maxVotes > 0 ? candidates.find(c => c.id === leaderId) : undefined;
           const leaderShare = totalStateVotes > 0 ? (maxVotes / totalStateVotes) * 100 : 0;
 
           // Which candidates reached 25% in this state?
@@ -229,22 +233,31 @@ export const GeopoliticalAnalysis: React.FC = () => {
 
                 {/* Leading candidate badge */}
                 <div className="mt-3 flex items-center justify-between text-xs bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                  <div className="flex items-center gap-2">
-                    <span 
-                      className="w-2.5 h-2.5 rounded-full"
-                      style={{ backgroundColor: leader?.partyColor }}
-                    ></span>
-                    <span className="text-slate-300 font-semibold truncate max-w-[140px]">{leader?.name}</span>
-                    <span 
-                      className="text-[9px] font-bold px-1.5 py-0.2 rounded text-white"
-                      style={{ backgroundColor: leader?.partyColor }}
-                    >
-                      {leader?.party}
-                    </span>
-                  </div>
-                  <div className="font-bold text-white font-mono">
-                    {leaderShare.toFixed(1)}%
-                  </div>
+                  {leader ? (
+                    <>
+                      <div className="flex items-center gap-2">
+                        <span 
+                          className="w-2.5 h-2.5 rounded-full"
+                          style={{ backgroundColor: leader.partyColor }}
+                        ></span>
+                        <span className="text-slate-300 font-semibold truncate max-w-[140px]">{leader.name}</span>
+                        <span 
+                          className="text-[9px] font-bold px-1.5 py-0.2 rounded text-white"
+                          style={{ backgroundColor: leader.partyColor }}
+                        >
+                          {leader.party}
+                        </span>
+                      </div>
+                      <div className="font-bold text-white font-mono">
+                        {leaderShare.toFixed(1)}%
+                      </div>
+                    </>
+                  ) : (
+                    <div className="flex items-center justify-between w-full text-slate-500 font-mono text-[11px]">
+                      <span>Awaiting live ballots</span>
+                      <span>0 votes</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Multi-Candidate Color Progress Bar */}
