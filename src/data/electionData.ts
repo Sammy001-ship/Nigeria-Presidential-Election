@@ -10,7 +10,7 @@ export const CANDIDATES: Candidate[] = [
     partyLogo: 'broom',
     partyColor: '#1d4ed8', // Royal Blue
     secondaryColor: '#f59e0b',
-    photoUrl: '/candidates/tinubu_bola_apc.jpg',
+    photoUrl: `${import.meta.env.BASE_URL}candidates/tinubu_bola_apc.jpg`,
     age: 74,
     stateOfOrigin: 'Lagos State',
     zone: 'South West',
@@ -81,7 +81,7 @@ export const CANDIDATES: Candidate[] = [
     partyLogo: 'victory',
     partyColor: '#059669', // Emerald Green & Red of NDC
     secondaryColor: '#dc2626',
-    photoUrl: '/candidates/obi_peter_ndc.jpg',
+    photoUrl: `${import.meta.env.BASE_URL}candidates/obi_peter_ndc.jpg`,
     age: 65,
     stateOfOrigin: 'Anambra State',
     zone: 'South East',
@@ -152,7 +152,7 @@ export const CANDIDATES: Candidate[] = [
     partyLogo: 'handshake',
     partyColor: '#1e40af', // Deep Blue of ADC
     secondaryColor: '#10b981',
-    photoUrl: '/candidates/atiku_abubakar_adc.jpg',
+    photoUrl: `${import.meta.env.BASE_URL}candidates/atiku_abubakar_adc.jpg`,
     age: 80,
     stateOfOrigin: 'Adamawa State',
     zone: 'North East',
@@ -223,7 +223,7 @@ export const CANDIDATES: Candidate[] = [
     partyLogo: 'balance',
     partyColor: '#be185d', // Magenta / Deep Pink
     secondaryColor: '#f59e0b',
-    photoUrl: '/candidates/ada_okwori_ndp.jpg',
+    photoUrl: `${import.meta.env.BASE_URL}candidates/ada_okwori_ndp.jpg`,
     age: 52,
     stateOfOrigin: 'Benue State',
     zone: 'North Central',
@@ -294,7 +294,7 @@ export const CANDIDATES: Candidate[] = [
     partyLogo: 'fist',
     partyColor: '#ea580c', // Bright Orange
     secondaryColor: '#000000',
-    photoUrl: '/candidates/sowore_omoyele_aac.jpg',
+    photoUrl: `${import.meta.env.BASE_URL}candidates/sowore_omoyele_aac.jpg`,
     age: 55,
     stateOfOrigin: 'Ondo State',
     zone: 'South West',
@@ -365,7 +365,7 @@ export const CANDIDATES: Candidate[] = [
     partyLogo: 'zap',
     partyColor: '#1e3a8a', // Royal Navy Blue of Action Alliance
     secondaryColor: '#15803d',
-    photoUrl: '/candidates/adekunle_omoaje_aa.jpg',
+    photoUrl: `${import.meta.env.BASE_URL}candidates/adekunle_omoaje_aa.jpg`,
     age: 68,
     stateOfOrigin: 'Osun State',
     zone: 'South West',
@@ -436,7 +436,7 @@ export const CANDIDATES: Candidate[] = [
     partyLogo: 'footprints',
     partyColor: '#16a34a', // Emerald Green & Crimson of Boot Party
     secondaryColor: '#dc2626',
-    photoUrl: '/candidates/adenuga_sunday_bp.jpg',
+    photoUrl: `${import.meta.env.BASE_URL}candidates/adenuga_sunday_bp.jpg`,
     age: 52,
     stateOfOrigin: 'Ogun State',
     zone: 'South West',
@@ -507,7 +507,7 @@ export const CANDIDATES: Candidate[] = [
     partyLogo: 'horse',
     partyColor: '#dc2626', // Crimson Red & White of SDP
     secondaryColor: '#16a34a',
-    photoUrl: '/candidates/adewole_adebayo_sdp.jpg',
+    photoUrl: `${import.meta.env.BASE_URL}candidates/adewole_adebayo_sdp.jpg`,
     age: 54,
     stateOfOrigin: 'Ondo State',
     zone: 'South West',
@@ -578,7 +578,7 @@ export const CANDIDATES: Candidate[] = [
     partyLogo: 'book',
     partyColor: '#1e3a8a', // Deep Blue & Gold of ADP
     secondaryColor: '#eab308',
-    photoUrl: '/candidates/aliyu_abbas_adp.jpg',
+    photoUrl: `${import.meta.env.BASE_URL}candidates/aliyu_abbas_adp.jpg`,
     age: 44,
     stateOfOrigin: 'Borno State',
     zone: 'North East',
