@@ -1,6 +1,12 @@
-import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { Candidate, GeopoliticalZone, VoteRecord, Comment, IssuePollOption } from '../types/election';
 import { CANDIDATES, NIGERIAN_STATES, INITIAL_STATE_VOTES, INITIAL_COMMENTS, TOP_ISSUES_POLL, GEOPOLITICAL_ZONES } from '../data/electionData';
+import {
+  isFirebaseConfigured,
+  subscribeToSharedElection,
+  updateSharedElection,
+  uploadCandidatePhoto
+} from '../lib/firebaseSync';
 
 export interface ConstitutionalCheckResult {
   candidateId: string;
@@ -56,7 +62,7 @@ interface ElectionContextType {
   liveFeed: LiveFeedItem[];
   isSimulationActive: boolean;
   toggleSimulation: () => void;
-  resetAllVotes: () => void;
+  resetAllVotes: () => Promise<void>;
   selectedZoneFilter: GeopoliticalZone | 'ALL';
   setSelectedZoneFilter: (zone: GeopoliticalZone | 'ALL') => void;
   searchQuery: string;
@@ -71,6 +77,9 @@ interface ElectionContextType {
   visitorLogs: VisitorLogEntry[];
   recordVisitorAction: (action: string, state?: string) => void;
   resetAnalytics: () => void;
+  isCloudSyncEnabled: boolean;
+  syncStatus: 'local' | 'connecting' | 'connected' | 'error';
+  syncError: string | null;
   isAdminAuthenticated: boolean;
   adminAuthModalOpen: boolean;
   setAdminAuthModalOpen: (open: boolean) => void;
@@ -100,6 +109,8 @@ if (typeof window !== 'undefined') {
 }
 
 export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const voteSubmissionInProgress = useRef(false);
+
   // Load state votes from storage (continues from live count) or initial zero
   const [stateVotes, setStateVotes] = useState<Record<string, Record<string, number>>>(() => {
     try {
@@ -151,7 +162,12 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const [liveFeed, setLiveFeed] = useState<LiveFeedItem[]>([]);
   // Start counting in real-time immediately
-  const [isSimulationActive, setIsSimulationActive] = useState<boolean>(true);
+  const [isSimulationActive, setIsSimulationActive] = useState<boolean>(() => !isFirebaseConfigured);
+  const [syncStatus, setSyncStatus] = useState<'local' | 'connecting' | 'connected' | 'error'>(
+    isFirebaseConfigured ? 'connecting' : 'local'
+  );
+  const [syncError, setSyncError] = useState<string | null>(null);
+  const hasReceivedSharedData = useRef(false);
   const [selectedZoneFilter, setSelectedZoneFilter] = useState<GeopoliticalZone | 'ALL'>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'vote' | 'results' | 'map' | 'candidates' | 'compare' | 'quiz' | 'townhall' | 'admin'>('vote');
@@ -212,7 +228,37 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return {};
   });
 
+  const reportSyncError = useCallback((error: unknown) => {
+    const message = error instanceof Error ? error.message : 'An unexpected Firebase error occurred.';
+    console.error('Shared election data could not be synced:', error);
+    setSyncError(message);
+    setSyncStatus('error');
+  }, []);
+
+  const commitSharedData = useCallback(async (
+    update: Parameters<typeof updateSharedElection>[0]
+  ) => {
+    try {
+      await updateSharedElection(update);
+      setSyncStatus('connected');
+      setSyncError(null);
+    } catch (error) {
+      reportSyncError(error);
+      throw error;
+    }
+  }, [reportSyncError]);
+
   const updateCandidatePhoto = useCallback((candidateId: string, photoDataUrl: string) => {
+    if (isFirebaseConfigured) {
+      void uploadCandidatePhoto(candidateId, photoDataUrl)
+        .then(photoUrl => commitSharedData(current => ({
+          ...current,
+          customPhotos: { ...current.customPhotos, [candidateId]: photoUrl }
+        })).catch(() => undefined))
+        .catch(reportSyncError);
+      return;
+    }
+
     setCustomPhotos(prev => {
       const updated = { ...prev, [candidateId]: photoDataUrl };
       try {
@@ -222,7 +268,7 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       }
       return updated;
     });
-  }, []);
+  }, [commitSharedData, reportSyncError]);
 
   const candidates = useMemo(() => {
     return CANDIDATES.map(c => ({
@@ -233,6 +279,7 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Sync stateVotes to localStorage
   useEffect(() => {
+    if (isFirebaseConfigured) return;
     try {
       localStorage.setItem(LOCAL_STORAGE_TALLIES_KEY, JSON.stringify(stateVotes));
     } catch {
@@ -242,6 +289,7 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Sync comments
   useEffect(() => {
+    if (isFirebaseConfigured) return;
     try {
       localStorage.setItem(LOCAL_STORAGE_COMMENTS_KEY, JSON.stringify(comments));
     } catch {
@@ -251,12 +299,48 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   // Sync issues
   useEffect(() => {
+    if (isFirebaseConfigured) return;
     try {
       localStorage.setItem(LOCAL_STORAGE_ISSUES_KEY, JSON.stringify(issuePolls));
     } catch {
       // fallback
     }
   }, [issuePolls]);
+
+  useEffect(() => {
+    if (!isFirebaseConfigured) return;
+
+    let isActive = true;
+    let unsubscribe: (() => void) | undefined;
+    setSyncStatus('connecting');
+    setSyncError(null);
+
+    void subscribeToSharedElection(
+      data => {
+        if (!isActive) return;
+        setStateVotes(data.stateVotes);
+        setComments(data.comments);
+        setIssuePolls(data.issuePolls);
+        setCustomPhotos(data.customPhotos);
+        if (!hasReceivedSharedData.current) {
+          hasReceivedSharedData.current = true;
+          setSyncStatus('connected');
+          setSyncError(null);
+        }
+      },
+      error => {
+        if (isActive) reportSyncError(error);
+      }
+    ).then(stop => {
+      if (isActive) unsubscribe = stop;
+      else stop();
+    }).catch(reportSyncError);
+
+    return () => {
+      isActive = false;
+      unsubscribe?.();
+    };
+  }, [reportSyncError]);
 
   // Aggregate candidate totals and national total
   const candidateTotals = useMemo(() => {
@@ -348,6 +432,10 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     if (userVote) {
       throw new Error('You have already cast your ballot. One vote per citizen is strictly enforced.');
     }
+    if (voteSubmissionInProgress.current) {
+      throw new Error('Your ballot is still being recorded. Please wait.');
+    }
+    voteSubmissionInProgress.current = true;
 
     const votingState = state || 'Lagos';
     const votingAgeGroup = ageGroup || '25-34';
@@ -372,15 +460,47 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       primaryReason: reason
     };
 
-    // Update tallies immediately: add 1 vote to the chosen candidate
-    setStateVotes(prev => {
-      const stateVotesObj = { ...prev };
-      const targetState = { ...(stateVotesObj[votingState] || {}) };
-      const currentCount = targetState[candidateId] || 0;
-      targetState[candidateId] = currentCount + 1;
-      stateVotesObj[votingState] = targetState;
-      return stateVotesObj;
-    });
+    const newComment: Comment | null = reason && reason.trim().length > 5 ? {
+      id: 'c_' + Date.now(),
+      author: name?.trim() || 'Verified Voter',
+      state: votingState,
+      candidateId,
+      content: reason.trim(),
+      timestamp: 'Just now',
+      likes: 1,
+      isVerifiedVoter: true
+    } : null;
+
+    if (isFirebaseConfigured) {
+      try {
+        await commitSharedData(current => {
+          const stateRecord = current.stateVotes[votingState] || {};
+          return {
+            ...current,
+            stateVotes: {
+              ...current.stateVotes,
+              [votingState]: {
+                ...stateRecord,
+                [candidateId]: (stateRecord[candidateId] || 0) + 1
+              }
+            },
+            comments: newComment ? [newComment, ...current.comments].slice(0, 200) : current.comments
+          };
+        });
+      } catch (error) {
+        voteSubmissionInProgress.current = false;
+        throw error;
+      }
+    } else {
+      setStateVotes(prev => {
+        const stateVotesObj = { ...prev };
+        const targetState = { ...(stateVotesObj[votingState] || {}) };
+        targetState[candidateId] = (targetState[candidateId] || 0) + 1;
+        stateVotesObj[votingState] = targetState;
+        return stateVotesObj;
+      });
+      if (newComment) setComments(prev => [newComment, ...prev]);
+    }
 
     // Save user vote
     setUserVote(newVote);
@@ -400,24 +520,9 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     };
     setLiveFeed(prev => [feedItem, ...prev.slice(0, 19)]);
 
-    // If reason provided, add as a verified comment in townhall
-    if (reason && reason.trim().length > 5) {
-      const newComment: Comment = {
-        id: 'c_' + Date.now(),
-        author: name?.trim() || 'Verified Voter',
-        state: votingState,
-        candidateId,
-        content: reason.trim(),
-        timestamp: 'Just now',
-        likes: 1,
-        isVerifiedVoter: true
-      };
-      setComments(prev => [newComment, ...prev]);
-    }
-
     setShowVoterSlipModal(true);
     return newVote;
-  }, []);
+  }, [userVote, commitSharedData]);
 
   // Add townhall comment
   const addComment = useCallback((candidateId: string, author: string, state: string, content: string) => {
@@ -431,22 +536,43 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       likes: 0,
       isVerifiedVoter: true
     };
-    setComments(prev => [newComment, ...prev]);
-  }, []);
+    if (isFirebaseConfigured) {
+      void commitSharedData(current => ({
+        ...current,
+        comments: [newComment, ...current.comments].slice(0, 200)
+      })).catch(() => undefined);
+    } else {
+      setComments(prev => [newComment, ...prev]);
+    }
+  }, [commitSharedData]);
 
   const likeComment = useCallback((commentId: string) => {
-    setComments(prev => prev.map(c => c.id === commentId ? { ...c, likes: c.likes + 1 } : c));
-  }, []);
+    if (isFirebaseConfigured) {
+      void commitSharedData(current => ({
+        ...current,
+        comments: current.comments.map(c => c.id === commentId ? { ...c, likes: c.likes + 1 } : c)
+      })).catch(() => undefined);
+    } else {
+      setComments(prev => prev.map(c => c.id === commentId ? { ...c, likes: c.likes + 1 } : c));
+    }
+  }, [commitSharedData]);
 
   const voteIssuePoll = useCallback((issueId: string) => {
-    setIssuePolls(prev => prev.map(i => i.id === issueId ? { ...i, votes: i.votes + 1 } : i));
+    if (isFirebaseConfigured) {
+      void commitSharedData(current => ({
+        ...current,
+        issuePolls: current.issuePolls.map(i => i.id === issueId ? { ...i, votes: i.votes + 1 } : i)
+      })).catch(() => undefined);
+    } else {
+      setIssuePolls(prev => prev.map(i => i.id === issueId ? { ...i, votes: i.votes + 1 } : i));
+    }
     setHasVotedIssue(true);
     localStorage.setItem('naija_votes_issue_voted', 'true');
-  }, []);
+  }, [commitSharedData]);
 
   // Background real-time live ballot stream: counts verified votes in real-time
   useEffect(() => {
-    if (!isSimulationActive) return;
+    if (!isSimulationActive || isFirebaseConfigured) return;
 
     const interval = setInterval(() => {
       // Pick random Nigerian state or diaspora
@@ -656,16 +782,30 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   const toggleSimulation = useCallback(() => {
+    if (isFirebaseConfigured) return;
     setIsSimulationActive(prev => !prev);
   }, []);
 
-  const resetAllVotes = useCallback(() => {
+  const resetAllVotes = useCallback(async () => {
+    if (isFirebaseConfigured) {
+      await commitSharedData(current => ({
+        ...current,
+        stateVotes: INITIAL_STATE_VOTES
+      }));
+      localStorage.removeItem(LOCAL_STORAGE_VOTE_KEY);
+      setUserVote(null);
+      voteSubmissionInProgress.current = false;
+      setLiveFeed([]);
+      return;
+    }
+
     localStorage.removeItem(LOCAL_STORAGE_VOTE_KEY);
     localStorage.removeItem(LOCAL_STORAGE_TALLIES_KEY);
     setUserVote(null);
+    voteSubmissionInProgress.current = false;
     setStateVotes(INITIAL_STATE_VOTES);
     setLiveFeed([]);
-  }, []);
+  }, [commitSharedData]);
 
   const verifyAdminPassword = useCallback((password: string): boolean => {
     if (password.trim() === 'Samuelpicolo1') {
@@ -744,6 +884,9 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         visitorLogs,
         recordVisitorAction,
         resetAnalytics,
+        isCloudSyncEnabled: isFirebaseConfigured,
+        syncStatus,
+        syncError,
         isAdminAuthenticated,
         adminAuthModalOpen,
         setAdminAuthModalOpen,

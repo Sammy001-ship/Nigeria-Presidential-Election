@@ -39,6 +39,7 @@ export const AdminDashboard: React.FC = () => {
     totalNationalVotes, 
     candidates,
     leadingCandidate, 
+    isCloudSyncEnabled,
     isSimulationActive, 
     toggleSimulation, 
     resetAnalytics,
@@ -54,10 +55,14 @@ export const AdminDashboard: React.FC = () => {
   const [showResetSandboxConfirm, setShowResetSandboxConfirm] = useState<boolean>(false);
   const [copiedNotification, setCopiedNotification] = useState<string | null>(null);
 
-  const handleResetSandbox = () => {
-    resetAllVotes();
-    setShowResetSandboxConfirm(false);
-    setCopiedNotification('Sandbox reset: All candidate ballots, tallies, and state votes have been reset to zero.');
+  const handleResetSandbox = async () => {
+    try {
+      await resetAllVotes();
+      setShowResetSandboxConfirm(false);
+      setCopiedNotification('Sandbox reset: All candidate ballots, tallies, and state votes have been reset to zero.');
+    } catch {
+      setCopiedNotification('Sandbox reset failed. Check the sync status and try again.');
+    }
     setTimeout(() => setCopiedNotification(null), 4000);
   };
 
@@ -268,13 +273,20 @@ export const AdminDashboard: React.FC = () => {
 
             <button
               onClick={toggleSimulation}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold border transition ${
+              disabled={isCloudSyncEnabled}
+              title={isCloudSyncEnabled ? 'Simulation is disabled while shared cloud results are active.' : undefined}
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold border transition disabled:cursor-not-allowed disabled:opacity-60 ${
                 isSimulationActive 
                   ? 'bg-emerald-950/70 text-emerald-200 border-emerald-700/60 hover:bg-emerald-900' 
                   : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
               }`}
             >
-              {isSimulationActive ? (
+              {isCloudSyncEnabled ? (
+                <>
+                  <Radio className="w-4 h-4 text-slate-400" />
+                  <span>Simulation off during cloud sync</span>
+                </>
+              ) : isSimulationActive ? (
                 <>
                   <Pause className="w-4 h-4 text-emerald-400" />
                   <span>Pause Live Feed</span>
