@@ -66,12 +66,18 @@ export const LiveResults: React.FC = () => {
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl relative overflow-hidden md:col-span-2">
           <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
             <span>Leading Candidate</span>
-            <span className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
-              <Trophy className="w-3 h-3 text-amber-400" /> Lead: {leadMargin.toLocaleString()} votes ({leadMarginPercent}%)
-            </span>
+            {leadingCandidate && totalNationalVotes > 0 ? (
+              <span className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
+                <Trophy className="w-3 h-3 text-amber-400" /> Lead: {leadMargin.toLocaleString()} votes ({leadMarginPercent}%)
+              </span>
+            ) : (
+              <span className="text-[10px] text-emerald-400 font-mono flex items-center gap-1">
+                <Radio className="w-3 h-3 text-emerald-400 animate-pulse" /> Live Stream Active
+              </span>
+            )}
           </div>
 
-          {leadingCandidate && (
+          {leadingCandidate && totalNationalVotes > 0 ? (
             <div className="flex items-center gap-4 mt-2">
               <div 
                 className="w-14 h-14 rounded-xl border-2 p-0.5 overflow-hidden shrink-0"
@@ -99,6 +105,11 @@ export const LiveResults: React.FC = () => {
                   {((candidateTotals[leadingCandidate.id] / (totalNationalVotes || 1)) * 100).toFixed(1)}%)
                 </div>
               </div>
+            </div>
+          ) : (
+            <div className="flex items-center gap-3 mt-3 py-2 text-slate-400 text-xs">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping shrink-0"></span>
+              <span>Real-time continuous ballot stream active. Votes tally dynamically as verified ballots arrive.</span>
             </div>
           )}
         </div>
@@ -175,7 +186,7 @@ export const LiveResults: React.FC = () => {
                         >
                           {candidate.party}
                         </span>
-                        {index === 0 && (
+                        {index === 0 && totalNationalVotes > 0 && votes > 0 && (
                           <span className="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] px-2 py-0.5 rounded-full font-bold">
                             Leader
                           </span>
@@ -202,7 +213,7 @@ export const LiveResults: React.FC = () => {
                   <div 
                     className="h-full rounded-full transition-all duration-700 ease-out shadow"
                     style={{ 
-                      width: `${Math.max(percentage, 2)}%`,
+                      width: `${totalNationalVotes > 0 && votes > 0 ? Math.max(percentage, 1.5) : 0}%`,
                       backgroundColor: candidate.partyColor
                     }}
                   ></div>

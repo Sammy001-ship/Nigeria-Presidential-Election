@@ -5,7 +5,6 @@ import {
   ExternalLink, 
   HelpCircle, 
   ChevronDown, 
-  RotateCcw, 
   Info,
   CheckCircle2,
   Heart,
@@ -13,7 +12,7 @@ import {
 } from 'lucide-react';
 
 export const INECDisclaimerFooter: React.FC = () => {
-  const { resetAllVotes, setActiveTab, isAdminAuthenticated, setAdminAuthModalOpen } = useElection();
+  const { setActiveTab, isAdminAuthenticated, setAdminAuthModalOpen } = useElection();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const faqs = [
@@ -129,13 +128,6 @@ export const INECDisclaimerFooter: React.FC = () => {
               className="hover:text-emerald-400 transition"
             >
               36 States
-            </button>
-            <button 
-              onClick={resetAllVotes}
-              className="text-slate-500 hover:text-amber-400 transition flex items-center gap-1"
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reset Sandbox</span>
             </button>
             <button 
               onClick={() => {

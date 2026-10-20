@@ -9,7 +9,6 @@ import {
   ShieldCheck, 
   MapPin, 
   Sparkles, 
-  RotateCcw,
   BarChart3,
   TrendingUp,
   Lock,
@@ -26,8 +25,7 @@ export const VotingBooth: React.FC = () => {
     candidateTotals,
     totalNationalVotes,
     setShowVoterSlipModal,
-    setActiveTab,
-    resetAllVotes
+    setActiveTab
   } = useElection();
 
   const [votingState, setVotingState] = useState<string>(userVote?.state || 'Lagos');
@@ -304,23 +302,11 @@ export const VotingBooth: React.FC = () => {
         })}
       </div>
 
-      {/* Footer Reset & Sandbox Info */}
+      {/* Footer Info */}
       <div className="text-center text-xs text-slate-500 pt-2 flex flex-wrap items-center justify-center gap-3">
         <span>🇳🇬 Nigeria 2027 Mock Presidential Poll</span>
         <span>•</span>
         <span>Strict Electoral Limit: 1 Vote Per Citizen</span>
-        {hasVoted && (
-          <>
-            <span>•</span>
-            <button 
-              onClick={resetAllVotes}
-              className="text-slate-500 hover:text-amber-400 transition flex items-center gap-1 font-medium underline"
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reset Ballot (Sandbox Test Mode)</span>
-            </button>
-          </>
-        )}
       </div>
     </div>
   );

@@ -42,6 +42,7 @@ export const AdminDashboard: React.FC = () => {
     isSimulationActive, 
     toggleSimulation, 
     resetAnalytics,
+    resetAllVotes,
     setActiveTab,
     isAdminAuthenticated,
     verifyAdminPassword,
@@ -50,7 +51,15 @@ export const AdminDashboard: React.FC = () => {
 
   const [activeLogFilter, setActiveLogFilter] = useState<'ALL' | 'VOTERS' | 'BROWSING'>('ALL');
   const [showResetConfirm, setShowResetConfirm] = useState<boolean>(false);
+  const [showResetSandboxConfirm, setShowResetSandboxConfirm] = useState<boolean>(false);
   const [copiedNotification, setCopiedNotification] = useState<string | null>(null);
+
+  const handleResetSandbox = () => {
+    resetAllVotes();
+    setShowResetSandboxConfirm(false);
+    setCopiedNotification('Sandbox reset: All candidate ballots, tallies, and state votes have been reset to zero.');
+    setTimeout(() => setCopiedNotification(null), 4000);
+  };
 
   // Inline Admin authentication state
   const [inlinePassword, setInlinePassword] = useState('');
@@ -285,6 +294,34 @@ export const AdminDashboard: React.FC = () => {
               <Download className="w-4 h-4 text-emerald-400" />
               <span>Export Telemetry</span>
             </button>
+
+            {/* Reset Sandbox Button */}
+            {showResetSandboxConfirm ? (
+              <div className="flex items-center gap-2 bg-amber-950/90 border border-amber-800/90 px-3 py-1.5 rounded-xl text-xs shadow-md">
+                <span className="text-amber-200 font-semibold">Reset all votes to 0?</span>
+                <button
+                  onClick={handleResetSandbox}
+                  className="bg-amber-600 hover:bg-amber-500 text-white font-bold px-2.5 py-1 rounded-lg text-xs transition shadow"
+                >
+                  Yes, Reset
+                </button>
+                <button
+                  onClick={() => setShowResetSandboxConfirm(false)}
+                  className="text-slate-400 hover:text-white px-2 py-1 text-xs"
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowResetSandboxConfirm(true)}
+                className="flex items-center gap-2 bg-amber-950/60 hover:bg-amber-900/70 text-amber-300 font-bold text-xs px-3.5 py-2 rounded-xl border border-amber-700/60 transition shadow-sm"
+                title="Reset Sandbox: Reset all candidate ballots, state counts, and tallies back to zero"
+              >
+                <RotateCcw className="w-4 h-4 text-amber-400" />
+                <span>Reset Sandbox</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -662,7 +699,38 @@ export const AdminDashboard: React.FC = () => {
             <span>Real-time listener active. Telemetry updates automatically.</span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Reset Sandbox Option */}
+            {showResetSandboxConfirm ? (
+              <div className="flex items-center gap-2 bg-amber-950/80 border border-amber-800 px-3 py-1.5 rounded-xl">
+                <span className="text-amber-300 font-semibold text-xs">Reset all sandbox votes to 0?</span>
+                <button
+                  onClick={handleResetSandbox}
+                  className="bg-amber-600 hover:bg-amber-500 text-white font-bold px-2 py-0.5 rounded text-[11px]"
+                >
+                  Yes, Reset Sandbox
+                </button>
+                <button
+                  onClick={() => setShowResetSandboxConfirm(false)}
+                  className="text-slate-400 hover:text-white px-2 py-0.5 text-[11px]"
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowResetSandboxConfirm(true)}
+                className="flex items-center gap-1.5 text-slate-400 hover:text-amber-400 transition"
+                title="Reset all candidate votes to zero"
+              >
+                <RotateCcw className="w-3.5 h-3.5 text-amber-400" />
+                <span>Reset Sandbox</span>
+              </button>
+            )}
+
+            <span className="text-slate-700">|</span>
+
+            {/* Reset Telemetry Option */}
             {showResetConfirm ? (
               <div className="flex items-center gap-2 bg-red-950/80 border border-red-800 px-3 py-1.5 rounded-xl">
                 <span className="text-red-300 font-semibold text-xs">Reset metrics?</span>

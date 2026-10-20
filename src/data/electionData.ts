@@ -1350,60 +1350,14 @@ export const GEOPOLITICAL_ZONES: { name: GeopoliticalZone; states: string[]; col
   { name: 'Diaspora', states: ['Diaspora Voters'], color: '#6366f1' }
 ];
 
-// Realistic baseline vote tallies simulating broad national sample (approx ~185,000 total baseline votes)
-export const INITIAL_STATE_VOTES: Record<string, Record<string, number>> = {
-  // South West (Makinde dominant in home Oyo, strong across South West)
-  'Lagos': { tinubu: 4620, obi: 4190, atiku: 920, okwori: 380, sowore: 540, omoaje: 610, okereke: 880, duke: 1120, esther_okereke: 640, kabiru_yusuf: 410, makinde: 2840, adebisi: 1840, nwanyanwu: 720, sandy_onor: 1180, agada: 1290 },
-  'Oyo': { tinubu: 3100, obi: 1650, atiku: 1200, okwori: 240, sowore: 310, omoaje: 280, okereke: 410, duke: 340, esther_okereke: 230, kabiru_yusuf: 210, makinde: 8420, adebisi: 890, nwanyanwu: 340, sandy_onor: 940, agada: 680 },
-  'Ogun': { tinubu: 2850, obi: 1420, atiku: 880, okwori: 180, sowore: 220, omoaje: 260, okereke: 320, duke: 290, esther_okereke: 190, kabiru_yusuf: 160, makinde: 2190, adebisi: 820, nwanyanwu: 290, sandy_onor: 410, agada: 480 },
-  'Osun': { tinubu: 2410, obi: 1390, atiku: 1620, okwori: 130, sowore: 190, omoaje: 210, okereke: 290, duke: 220, esther_okereke: 160, kabiru_yusuf: 140, makinde: 2480, adebisi: 3280, nwanyanwu: 240, sandy_onor: 680, agada: 510 },
-  'Ondo': { tinubu: 2530, obi: 1280, atiku: 890, okwori: 140, sowore: 810, omoaje: 190, okereke: 310, duke: 280, esther_okereke: 170, kabiru_yusuf: 150, makinde: 1890, adebisi: 610, nwanyanwu: 260, sandy_onor: 440, agada: 420 },
-  'Ekiti': { tinubu: 2180, obi: 980, atiku: 720, okwori: 90, sowore: 140, omoaje: 160, okereke: 220, duke: 180, esther_okereke: 120, kabiru_yusuf: 110, makinde: 1450, adebisi: 540, nwanyanwu: 190, sandy_onor: 320, agada: 340 },
-
-  // South East (Dan Nwanyanwu strong in home Imo, competitive in South East)
-  'Anambra': { tinubu: 410, obi: 6850, atiku: 380, okwori: 70, sowore: 110, omoaje: 450, okereke: 2150, duke: 620, esther_okereke: 430, kabiru_yusuf: 180, makinde: 680, adebisi: 450, nwanyanwu: 1420, sandy_onor: 940, agada: 1120 },
-  'Enugu': { tinubu: 380, obi: 5420, atiku: 420, okwori: 60, sowore: 90, omoaje: 390, okereke: 1940, duke: 580, esther_okereke: 390, kabiru_yusuf: 160, makinde: 620, adebisi: 410, nwanyanwu: 1280, sandy_onor: 880, agada: 1450 },
-  'Imo': { tinubu: 620, obi: 4980, atiku: 510, okwori: 90, sowore: 120, omoaje: 380, okereke: 1820, duke: 510, esther_okereke: 460, kabiru_yusuf: 170, makinde: 540, adebisi: 390, nwanyanwu: 4890, sandy_onor: 820, agada: 980 },
-  'Abia': { tinubu: 490, obi: 5110, atiku: 440, okwori: 70, sowore: 80, omoaje: 340, okereke: 2890, duke: 490, esther_okereke: 410, kabiru_yusuf: 150, makinde: 490, adebisi: 360, nwanyanwu: 1350, sandy_onor: 790, agada: 890 },
-  'Ebonyi': { tinubu: 890, obi: 3820, atiku: 610, okwori: 80, sowore: 70, omoaje: 290, okereke: 1450, duke: 410, esther_okereke: 310, kabiru_yusuf: 140, makinde: 410, adebisi: 280, nwanyanwu: 920, sandy_onor: 640, agada: 740 },
-
-  // South South (Sandy Onor high in home Cross River, competitive across South South)
-  'Rivers': { tinubu: 2750, obi: 3920, atiku: 1820, okwori: 210, sowore: 310, omoaje: 780, okereke: 890, duke: 2650, esther_okereke: 980, kabiru_yusuf: 430, makinde: 1240, adebisi: 880, nwanyanwu: 840, sandy_onor: 1420, agada: 960 },
-  'Delta': { tinubu: 1840, obi: 3610, atiku: 2790, okwori: 160, sowore: 250, omoaje: 920, okereke: 760, duke: 1840, esther_okereke: 3420, kabiru_yusuf: 380, makinde: 1150, adebisi: 740, nwanyanwu: 710, sandy_onor: 1280, agada: 840 },
-  'Edo': { tinubu: 2210, obi: 3450, atiku: 1920, okwori: 140, sowore: 280, omoaje: 510, okereke: 680, duke: 1620, esther_okereke: 1120, kabiru_yusuf: 310, makinde: 1680, adebisi: 790, nwanyanwu: 680, sandy_onor: 1140, agada: 890 },
-  'Akwa Ibom': { tinubu: 1620, obi: 2890, atiku: 2650, okwori: 110, sowore: 170, omoaje: 460, okereke: 540, duke: 3480, esther_okereke: 810, kabiru_yusuf: 240, makinde: 890, adebisi: 520, nwanyanwu: 490, sandy_onor: 1390, agada: 720 },
-  'Cross River': { tinubu: 1890, obi: 2710, atiku: 1780, okwori: 90, sowore: 160, omoaje: 410, okereke: 510, duke: 7920, esther_okereke: 720, kabiru_yusuf: 220, makinde: 740, adebisi: 490, nwanyanwu: 430, sandy_onor: 5820, agada: 680 },
-  'Bayelsa': { tinubu: 1210, obi: 1950, atiku: 1890, okwori: 80, sowore: 110, omoaje: 310, okereke: 430, duke: 1390, esther_okereke: 690, kabiru_yusuf: 180, makinde: 610, adebisi: 410, nwanyanwu: 380, sandy_onor: 980, agada: 540 },
-
-  // North West
-  'Kano': { tinubu: 2840, obi: 980, atiku: 1920, okwori: 6720, sowore: 150, omoaje: 290, okereke: 510, duke: 820, esther_okereke: 410, kabiru_yusuf: 2450, makinde: 920, adebisi: 780, nwanyanwu: 460, sandy_onor: 740, agada: 890 },
-  'Kaduna': { tinubu: 2980, obi: 3120, atiku: 3250, okwori: 1890, sowore: 210, omoaje: 380, okereke: 720, duke: 790, esther_okereke: 450, kabiru_yusuf: 1890, makinde: 1120, adebisi: 840, nwanyanwu: 520, sandy_onor: 860, agada: 1240 },
-  'Katsina': { tinubu: 3820, obi: 410, atiku: 3450, okwori: 1640, sowore: 90, omoaje: 140, okereke: 320, duke: 290, esther_okereke: 210, kabiru_yusuf: 1240, makinde: 430, adebisi: 310, nwanyanwu: 210, sandy_onor: 410, agada: 440 },
-  'Jigawa': { tinubu: 3120, obi: 320, atiku: 2680, okwori: 1420, sowore: 70, omoaje: 110, okereke: 240, duke: 210, esther_okereke: 170, kabiru_yusuf: 1150, makinde: 360, adebisi: 260, nwanyanwu: 190, sandy_onor: 380, agada: 390 },
-  'Sokoto': { tinubu: 2850, obi: 340, atiku: 2980, okwori: 780, sowore: 60, omoaje: 120, okereke: 210, duke: 190, esther_okereke: 150, kabiru_yusuf: 980, makinde: 340, adebisi: 230, nwanyanwu: 160, sandy_onor: 350, agada: 360 },
-  'Kebbi': { tinubu: 2740, obi: 280, atiku: 2610, okwori: 650, sowore: 50, omoaje: 140, okereke: 190, duke: 180, esther_okereke: 130, kabiru_yusuf: 890, makinde: 310, adebisi: 210, nwanyanwu: 140, sandy_onor: 320, agada: 340 },
-  'Zamfara': { tinubu: 2610, obi: 240, atiku: 2540, okwori: 590, sowore: 40, omoaje: 90, okereke: 160, duke: 150, esther_okereke: 110, kabiru_yusuf: 920, makinde: 280, adebisi: 190, nwanyanwu: 130, sandy_onor: 290, agada: 310 },
-
-  // North East (Kabiru Yusuf high in home Bauchi & neighboring Gombe/Yobe/Adamawa)
-  'Adamawa': { tinubu: 1420, obi: 890, atiku: 4890, okwori: 480, sowore: 110, omoaje: 260, okereke: 360, duke: 310, esther_okereke: 240, kabiru_yusuf: 1180, makinde: 480, adebisi: 390, nwanyanwu: 260, sandy_onor: 620, agada: 680 },
-  'Borno': { tinubu: 4520, obi: 410, atiku: 1890, okwori: 520, sowore: 90, omoaje: 180, okereke: 310, duke: 290, esther_okereke: 210, kabiru_yusuf: 980, makinde: 420, adebisi: 320, nwanyanwu: 210, sandy_onor: 480, agada: 520 },
-  'Bauchi': { tinubu: 2420, obi: 620, atiku: 3510, okwori: 1210, sowore: 80, omoaje: 160, okereke: 280, duke: 270, esther_okereke: 190, kabiru_yusuf: 6840, makinde: 390, adebisi: 310, nwanyanwu: 190, sandy_onor: 540, agada: 580 },
-  'Yobe': { tinubu: 3280, obi: 290, atiku: 1650, okwori: 410, sowore: 60, omoaje: 110, okereke: 190, duke: 180, esther_okereke: 140, kabiru_yusuf: 1390, makinde: 290, adebisi: 220, nwanyanwu: 160, sandy_onor: 360, agada: 390 },
-  'Taraba': { tinubu: 1410, obi: 1980, atiku: 2840, okwori: 390, sowore: 90, omoaje: 220, okereke: 340, duke: 380, esther_okereke: 280, kabiru_yusuf: 1140, makinde: 460, adebisi: 310, nwanyanwu: 240, sandy_onor: 590, agada: 840 },
-  'Gombe': { tinubu: 2120, obi: 540, atiku: 2690, okwori: 810, sowore: 70, omoaje: 130, okereke: 260, duke: 240, esther_okereke: 190, kabiru_yusuf: 2480, makinde: 380, adebisi: 270, nwanyanwu: 220, sandy_onor: 460, agada: 520 },
-
-  // North Central (Peter Ada Agada dominant in home Benue and competitive across Middle Belt)
-  'FCT Abuja': { tinubu: 2310, obi: 4620, atiku: 1420, okwori: 480, sowore: 420, omoaje: 890, okereke: 1240, duke: 1840, esther_okereke: 1420, kabiru_yusuf: 1120, makinde: 2140, adebisi: 1720, nwanyanwu: 1210, sandy_onor: 1460, agada: 2180 },
-  'Plateau': { tinubu: 1720, obi: 3840, atiku: 2110, okwori: 310, sowore: 180, omoaje: 410, okereke: 760, duke: 690, esther_okereke: 460, kabiru_yusuf: 940, makinde: 920, adebisi: 680, nwanyanwu: 490, sandy_onor: 780, agada: 1650 },
-  'Benue': { tinubu: 2410, obi: 2980, atiku: 1840, okwori: 210, sowore: 140, omoaje: 290, okereke: 620, duke: 590, esther_okereke: 410, kabiru_yusuf: 680, makinde: 810, adebisi: 590, nwanyanwu: 440, sandy_onor: 690, agada: 5740 },
-  'Nasarawa': { tinubu: 1980, obi: 2820, atiku: 1890, okwori: 420, sowore: 120, omoaje: 240, okereke: 590, duke: 510, esther_okereke: 370, kabiru_yusuf: 740, makinde: 760, adebisi: 540, nwanyanwu: 410, sandy_onor: 620, agada: 1140 },
-  'Kogi': { tinubu: 2950, obi: 1640, atiku: 1810, okwori: 260, sowore: 130, omoaje: 210, okereke: 480, duke: 430, esther_okereke: 310, kabiru_yusuf: 520, makinde: 940, adebisi: 480, nwanyanwu: 390, sandy_onor: 580, agada: 820 },
-  'Kwara': { tinubu: 2820, obi: 1410, atiku: 2010, okwori: 240, sowore: 160, omoaje: 250, okereke: 420, duke: 390, esther_okereke: 290, kabiru_yusuf: 490, makinde: 1840, adebisi: 820, nwanyanwu: 340, sandy_onor: 520, agada: 690 },
-  'Niger': { tinubu: 3210, obi: 1120, atiku: 2240, okwori: 620, sowore: 110, omoaje: 190, okereke: 390, duke: 340, esther_okereke: 260, kabiru_yusuf: 860, makinde: 780, adebisi: 460, nwanyanwu: 310, sandy_onor: 490, agada: 720 },
-
-  // Diaspora
-  'Diaspora Voters': { tinubu: 1450, obi: 6420, atiku: 1120, okwori: 310, sowore: 1280, omoaje: 1940, okereke: 1540, duke: 2190, esther_okereke: 1380, kabiru_yusuf: 840, makinde: 2640, adebisi: 3120, nwanyanwu: 1640, sandy_onor: 1820, agada: 2490 }
-};
+// Baseline vote tallies strictly start from zero across all Nigerian states and candidates
+export const INITIAL_STATE_VOTES: Record<string, Record<string, number>> = NIGERIAN_STATES.reduce((acc, state) => {
+  acc[state.name] = CANDIDATES.reduce((cAcc, cand) => {
+    cAcc[cand.id] = 0;
+    return cAcc;
+  }, {} as Record<string, number>);
+  return acc;
+}, {} as Record<string, Record<string, number>>);
 
 export const INITIAL_COMMENTS: Comment[] = [
   {
@@ -1413,7 +1367,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'obi',
     content: 'Obi Peter Gregory represents fiscal prudence and genuine production. His track record in Anambra speaks for itself—no pension arrears, left billions in reserves. NDC all the way!',
     timestamp: '15 mins ago',
-    likes: 42,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1423,7 +1377,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'okwori',
     content: 'Ada Elizabeth Fredrick Okwori represents true grassroots compassion, agro-allied innovation, and women empowerment. Her plans for cold-storage hubs and maternal healthcare will revitalize middle-belt farming families. NDP all the way!',
     timestamp: '28 mins ago',
-    likes: 31,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1433,7 +1387,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'tinubu',
     content: 'President Tinubu took the tough, bold decisions that previous leaders dodged for 30 years (subsidy removal and FX unification). The Lagos-Calabar coastal road and NELFUND student loans show long-term vision. Let him consolidate.',
     timestamp: '42 mins ago',
-    likes: 27,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1443,7 +1397,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'atiku',
     content: 'Atiku has always championed restructuring and private enterprise. The federal government has too much power concentrated in Abuja. Devolution to states and state police is the only lasting solution to our security and economic woes.',
     timestamp: '1 hour ago',
-    likes: 19,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1453,7 +1407,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'sowore',
     content: 'Sowore is the only one who consistently stands with ordinary workers and student unions without compromising with the political elite. ₦250k minimum wage and free healthcare is what true democracy looks like!',
     timestamp: '2 hours ago',
-    likes: 24,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1463,7 +1417,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'omoaje',
     content: 'Adekunle Rufai Omoaje has championed grassroots democracy and local government autonomy for decades. The Action Alliance platform for youth vocational skills and cottage industrialization will transform our communities!',
     timestamp: '3 hours ago',
-    likes: 38,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1473,7 +1427,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'okereke',
     content: 'Dr. Chibuzo Okereke brings deep legislative governance and institutional integrity to the table. His "Believe Again" blueprint prioritizes workers rights, educational investment, and real accountability. Labour Party (LP) forward!',
     timestamp: '15 mins ago',
-    likes: 42,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1483,7 +1437,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'duke',
     content: 'Donald Duke proved what good governance looks like in Cross River: clean cities, the Calabar Carnival, and Tinapa. Under the historic People\'s Redemption Party (PRP), he brings the exact visionary, creative leadership Nigeria needs to diversify from oil!',
     timestamp: '8 mins ago',
-    likes: 56,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1493,7 +1447,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'esther_okereke',
     content: 'Amb. Esther Nkem Okereke ("Dr. NEO") represents real female leadership and compassion. Her ESTHER Agenda for maternal healthcare, creative industry investment, and micro-loans for market women is inspiring grassroots Nigerians nationwide under NRM!',
     timestamp: '5 mins ago',
-    likes: 64,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1503,7 +1457,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'kabiru_yusuf',
     content: 'Alhaji Kabiru Yusuf is a true grassroots champion of the masses. His Action Peoples Party (APP) blueprint for solar irrigation dams and farmer security will restore food security and prosperity to Northern communities and across the federation!',
     timestamp: '2 mins ago',
-    likes: 47,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1513,7 +1467,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'makinde',
     content: 'Governor Seyi Makinde has proven what engineering precision and financial prudence can do in governance. From prompt 25th salary dates and sole LAUTECH ownership to the Ibadan Circular road and agribusiness hubs, his APM candidacy offers Nigeria tested administrative brilliance!',
     timestamp: 'Just now',
-    likes: 78,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1523,7 +1477,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'adebisi',
     content: 'At 35, Moses Olusoji Adebisi represents the authentic energy and tech-forward mind of Nigeria\'s youth population. His Democratic Leadership Alliance (DLA) agenda for digital venture capital, ethical AI governance, and youth leadership quotas is the generational shift Nigeria desperately needs!',
     timestamp: 'Just now',
-    likes: 83,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1533,7 +1487,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'nwanyanwu',
     content: 'Chief Dan Nwanyanwu has fought on the frontline for workers\' rights and pension dignity his entire life. From pioneer leadership in the labor movement to the Zenith Labour Party (ZLP), his commitment to domestic refining, honest judiciary, and industrial democracy is unwavering!',
     timestamp: 'Just now',
-    likes: 59,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1543,7 +1497,7 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'sandy_onor',
     content: 'Prof. Sandy Ojang Onor ("The Caterpillar") represents authentic grassroots power and academic brilliance. As former Senator, ALGON leader, and Commissioner, his fight for 100% LGA autonomy and agro-allied export corridors under PDP will rebuild Nigeria from the local councils up!',
     timestamp: 'Just now',
-    likes: 67,
+    likes: 0,
     isVerifiedVoter: true
   },
   {
@@ -1553,17 +1507,17 @@ export const INITIAL_COMMENTS: Comment[] = [
     candidateId: 'agada',
     content: 'Arc. Peter Ada Agada is an infrastructure visionary! His "Nigeria As A Project Site" blueprint and direct labor methodology will put government project funds directly into the pockets of youth artisans and engineers, while cutting out corrupt middlemen under the YPP banner.',
     timestamp: 'Just now',
-    likes: 74,
+    likes: 0,
     isVerifiedVoter: true
   }
 ];
 
 export const TOP_ISSUES_POLL: IssuePollOption[] = [
-  { id: 'economy', title: 'Naira Stability & Inflation', description: 'Tackling hyper-inflation, food prices, and stabilizing exchange rates.', votes: 4120, icon: 'TrendingDown' },
-  { id: 'security', title: 'Security & Banditry / State Police', description: 'Halting kidnapping, farmer-herder clashes, and securing agrarian belts.', votes: 3680, icon: 'Shield' },
-  { id: 'jobs', title: 'Youth Unemployment & Living Wage', description: 'Creating tech/industrial jobs and paying a fair living wage.', votes: 2940, icon: 'Briefcase' },
-  { id: 'power', title: '24/7 Electricity & Refineries', description: 'Ending national grid collapse and refining crude oil locally.', votes: 2510, icon: 'Zap' },
-  { id: 'corruption', title: 'Cost of Governance & Corruption', description: 'Cutting wasteful elite spending, luxury convoys, and looting.', votes: 3190, icon: 'DollarSign' }
+  { id: 'economy', title: 'Naira Stability & Inflation', description: 'Tackling hyper-inflation, food prices, and stabilizing exchange rates.', votes: 0, icon: 'TrendingDown' },
+  { id: 'security', title: 'Security & Banditry / State Police', description: 'Halting kidnapping, farmer-herder clashes, and securing agrarian belts.', votes: 0, icon: 'Shield' },
+  { id: 'jobs', title: 'Youth Unemployment & Living Wage', description: 'Creating tech/industrial jobs and paying a fair living wage.', votes: 0, icon: 'Briefcase' },
+  { id: 'power', title: '24/7 Electricity & Refineries', description: 'Ending national grid collapse and refining crude oil locally.', votes: 0, icon: 'Zap' },
+  { id: 'corruption', title: 'Cost of Governance & Corruption', description: 'Cutting wasteful elite spending, luxury convoys, and looting.', votes: 0, icon: 'DollarSign' }
 ];
 
 export const MATCHMAKER_QUIZ: QuizQuestion[] = [
