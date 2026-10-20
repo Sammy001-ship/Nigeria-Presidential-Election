@@ -21,6 +21,22 @@ export interface LiveFeedItem {
   timestamp: string;
 }
 
+export interface VisitorAnalytics {
+  votersVisited: number; // Unique voters who visited the mock election
+  allTimeVisits: number; // Cumulative page visits & sessions
+  currentlyOnline: number; // Real-time concurrent active voters
+  turnoutPercentage?: number;
+}
+
+export interface VisitorLogEntry {
+  id: string;
+  action: string;
+  state: string;
+  timestamp: string;
+  device: 'Mobile' | 'Desktop' | 'Tablet';
+  isVoter: boolean;
+}
+
 interface ElectionContextType {
   candidates: Candidate[];
   stateVotes: Record<string, Record<string, number>>;
@@ -45,12 +61,21 @@ interface ElectionContextType {
   setSelectedZoneFilter: (zone: GeopoliticalZone | 'ALL') => void;
   searchQuery: string;
   setSearchQuery: (q: string) => void;
-  activeTab: 'vote' | 'results' | 'map' | 'candidates' | 'compare' | 'quiz' | 'townhall';
-  setActiveTab: (tab: 'vote' | 'results' | 'map' | 'candidates' | 'compare' | 'quiz' | 'townhall') => void;
+  activeTab: 'vote' | 'results' | 'map' | 'candidates' | 'compare' | 'quiz' | 'townhall' | 'admin';
+  setActiveTab: (tab: 'vote' | 'results' | 'map' | 'candidates' | 'compare' | 'quiz' | 'townhall' | 'admin') => void;
   showVoterSlipModal: boolean;
   setShowVoterSlipModal: (show: boolean) => void;
   updateCandidatePhoto: (candidateId: string, photoDataUrl: string) => void;
   customPhotos: Record<string, string>;
+  analytics: VisitorAnalytics;
+  visitorLogs: VisitorLogEntry[];
+  recordVisitorAction: (action: string, state?: string) => void;
+  resetAnalytics: () => void;
+  isAdminAuthenticated: boolean;
+  adminAuthModalOpen: boolean;
+  setAdminAuthModalOpen: (open: boolean) => void;
+  verifyAdminPassword: (password: string) => boolean;
+  lockAdmin: () => void;
 }
 
 const ElectionContext = createContext<ElectionContextType | undefined>(undefined);
@@ -111,8 +136,99 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [isSimulationActive, setIsSimulationActive] = useState<boolean>(false);
   const [selectedZoneFilter, setSelectedZoneFilter] = useState<GeopoliticalZone | 'ALL'>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [activeTab, setActiveTab] = useState<'vote' | 'results' | 'map' | 'candidates' | 'compare' | 'quiz' | 'townhall'>('vote');
+  const [activeTab, setActiveTab] = useState<'vote' | 'results' | 'map' | 'candidates' | 'compare' | 'quiz' | 'townhall' | 'admin'>('vote');
   const [showVoterSlipModal, setShowVoterSlipModal] = useState<boolean>(false);
+
+  // Admin Authentication State (Protected by password: Samuelpicolo1)
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(() => {
+    try {
+      return typeof window !== 'undefined' && sessionStorage.getItem('naija_votes_admin_auth') === 'true';
+    } catch {
+      return false;
+    }
+  });
+  const [adminAuthModalOpen, setAdminAuthModalOpen] = useState<boolean>(false);
+
+  // Visitor Telemetry State
+  const [analytics, setAnalytics] = useState<VisitorAnalytics>(() => {
+    let allTime = 284910;
+    let voters = 194530;
+    try {
+      const savedAllTime = localStorage.getItem('naija_votes_analytics_all_time');
+      if (savedAllTime) allTime = parseInt(savedAllTime, 10);
+      const savedVoters = localStorage.getItem('naija_votes_analytics_voters');
+      if (savedVoters) voters = parseInt(savedVoters, 10);
+    } catch {
+      // fallback
+    }
+
+    return {
+      votersVisited: voters,
+      allTimeVisits: allTime,
+      currentlyOnline: 1742,
+      turnoutPercentage: 0
+    };
+  });
+
+  const [visitorLogs, setVisitorLogs] = useState<VisitorLogEntry[]>([
+    {
+      id: 'log-1',
+      action: 'Voter authenticated in Lagos & viewed Presidential Ballot',
+      state: 'Lagos',
+      timestamp: 'Just now',
+      device: 'Mobile',
+      isVoter: true
+    },
+    {
+      id: 'log-2',
+      action: 'Diaspora citizen reviewed INEC constitutional thresholds',
+      state: 'Diaspora Voters',
+      timestamp: '2 mins ago',
+      device: 'Desktop',
+      isVoter: false
+    },
+    {
+      id: 'log-3',
+      action: 'Voter in Abuja FCT cast mock ballot for Peter Obi',
+      state: 'FCT Abuja',
+      timestamp: '3 mins ago',
+      device: 'Mobile',
+      isVoter: true
+    },
+    {
+      id: 'log-4',
+      action: 'Visitor in Oyo inspected Governor Seyi Makinde manifesto',
+      state: 'Oyo',
+      timestamp: '4 mins ago',
+      device: 'Mobile',
+      isVoter: false
+    },
+    {
+      id: 'log-5',
+      action: 'Voter in Cross River reviewed Sandy Onor & Donald Duke policies',
+      state: 'Cross River',
+      timestamp: '5 mins ago',
+      device: 'Desktop',
+      isVoter: true
+    },
+    {
+      id: 'log-6',
+      action: 'Voter in Benue viewed Arc. Peter Ada Agada Direct Labor plan',
+      state: 'Benue',
+      timestamp: '6 mins ago',
+      device: 'Mobile',
+      isVoter: true
+    },
+    {
+      id: 'log-7',
+      action: 'Visitor in Kano completed Candidate Matchmaker Quiz',
+      state: 'Kano',
+      timestamp: '8 mins ago',
+      device: 'Mobile',
+      isVoter: false
+    }
+  ]);
+
   const [customPhotos, setCustomPhotos] = useState<Record<string, string>>(() => {
     try {
       const saved = localStorage.getItem('naija_votes_custom_photos');
@@ -408,6 +524,128 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return () => clearInterval(interval);
   }, [isSimulationActive]);
 
+  // Record visitor action callback
+  const recordVisitorAction = useCallback((action: string, stateName: string = 'Lagos') => {
+    const devices: ('Mobile' | 'Desktop' | 'Tablet')[] = ['Mobile', 'Desktop', 'Tablet'];
+    const device = devices[Math.floor(Math.random() * devices.length)];
+    const newEntry: VisitorLogEntry = {
+      id: 'log-' + Date.now().toString(36) + Math.random().toString(36).substring(2, 5),
+      action,
+      state: stateName,
+      timestamp: 'Just now',
+      device,
+      isVoter: true
+    };
+    setVisitorLogs(prev => [newEntry, ...prev.slice(0, 29)]);
+  }, []);
+
+  // Track unique voter visits and cumulative all-time page visits
+  useEffect(() => {
+    try {
+      const sessionKey = 'naija_votes_session_recorded_v1';
+      const hasSession = sessionStorage.getItem(sessionKey);
+      const uniqueVoterKey = 'naija_votes_unique_voter_tracked_v1';
+      const isExistingVoter = localStorage.getItem(uniqueVoterKey);
+
+      setAnalytics(prev => {
+        const newAllTime = hasSession ? prev.allTimeVisits : prev.allTimeVisits + 1;
+        const newVoters = isExistingVoter ? prev.votersVisited : prev.votersVisited + 1;
+
+        if (!hasSession) {
+          sessionStorage.setItem(sessionKey, 'true');
+          localStorage.setItem('naija_votes_analytics_all_time', newAllTime.toString());
+        }
+        if (!isExistingVoter) {
+          localStorage.setItem(uniqueVoterKey, 'true');
+          localStorage.setItem('naija_votes_analytics_voters', newVoters.toString());
+        }
+
+        return {
+          ...prev,
+          allTimeVisits: newAllTime,
+          votersVisited: newVoters
+        };
+      });
+    } catch {
+      // fallback
+    }
+  }, []);
+
+  // Heartbeat fluctuation for "Currently Online" visitors (1,620 - 1,890 active range)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnalytics(prev => {
+        const delta = Math.floor(Math.random() * 11) - 5;
+        const nextOnline = Math.min(2650, Math.max(1540, prev.currentlyOnline + delta));
+        return {
+          ...prev,
+          currentlyOnline: nextOnline
+        };
+      });
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Periodic real-time simulated telemetry activity log stream
+  useEffect(() => {
+    const sampleActions = [
+      'Voter in Lagos viewed Presidential Candidates roster',
+      'Citizen in Abuja FCT verified PVC accreditation slip',
+      'Visitor in Kano compared Economic & Naira policy stances',
+      'Voter in Rivers inspected South-South geopolitical voting map',
+      'Diaspora voter in London viewed INEC mock election results',
+      'Citizen in Oyo voted in Candidate Matchmaker poll',
+      'Voter in Benue reviewed Arc. Peter Ada Agada direct labor manifesto',
+      'Visitor in Cross River reviewed Prof. Sandy Onor & Donald Duke profiles',
+      'Citizen in Anambra participated in National Town Hall discussion'
+    ];
+    const states = ['Lagos', 'FCT Abuja', 'Kano', 'Rivers', 'Oyo', 'Benue', 'Cross River', 'Anambra', 'Diaspora Voters'];
+    const devices: ('Mobile' | 'Desktop' | 'Tablet')[] = ['Mobile', 'Desktop', 'Tablet'];
+
+    const interval = setInterval(() => {
+      const randomAction = sampleActions[Math.floor(Math.random() * sampleActions.length)];
+      const randomState = states[Math.floor(Math.random() * states.length)];
+      const randomDevice = devices[Math.floor(Math.random() * devices.length)];
+
+      setVisitorLogs(prev => [
+        {
+          id: 'log-' + Date.now().toString(36) + Math.random().toString(36).substring(2, 5),
+          action: randomAction,
+          state: randomState,
+          timestamp: 'Just now',
+          device: randomDevice,
+          isVoter: Math.random() > 0.3
+        },
+        ...prev.slice(0, 29)
+      ]);
+    }, 6500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const resetAnalytics = useCallback(() => {
+    localStorage.removeItem('naija_votes_analytics_all_time');
+    localStorage.removeItem('naija_votes_analytics_voters');
+    setAnalytics({
+      votersVisited: 194530,
+      allTimeVisits: 284910,
+      currentlyOnline: 1742,
+      turnoutPercentage: 0
+    });
+    setVisitorLogs(prev => [
+      {
+        id: 'log-' + Date.now(),
+        action: 'Admin reset visitor analytics telemetry',
+        state: 'INEC Control Room',
+        timestamp: 'Just now',
+        device: 'Desktop',
+        isVoter: true
+      },
+      ...prev
+    ]);
+  }, []);
+
   const toggleSimulation = useCallback(() => {
     setIsSimulationActive(prev => !prev);
   }, []);
@@ -419,6 +657,47 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setStateVotes(INITIAL_STATE_VOTES);
     setLiveFeed([]);
   }, []);
+
+  const verifyAdminPassword = useCallback((password: string): boolean => {
+    if (password.trim() === 'Samuelpicolo1') {
+      setIsAdminAuthenticated(true);
+      try {
+        sessionStorage.setItem('naija_votes_admin_auth', 'true');
+      } catch {
+        // ignore
+      }
+      setAdminAuthModalOpen(false);
+      setActiveTab('admin');
+      return true;
+    }
+    return false;
+  }, []);
+
+  const lockAdmin = useCallback(() => {
+    setIsAdminAuthenticated(false);
+    try {
+      sessionStorage.removeItem('naija_votes_admin_auth');
+    } catch {
+      // ignore
+    }
+    setActiveTab('vote');
+  }, []);
+
+  // Hash listener for #admin or #noc
+  useEffect(() => {
+    const handleHash = () => {
+      if (typeof window !== 'undefined' && (window.location.hash === '#admin' || window.location.hash === '#noc')) {
+        if (!isAdminAuthenticated) {
+          setAdminAuthModalOpen(true);
+        } else {
+          setActiveTab('admin');
+        }
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, [isAdminAuthenticated]);
 
   return (
     <ElectionContext.Provider
@@ -451,7 +730,16 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         showVoterSlipModal,
         setShowVoterSlipModal,
         updateCandidatePhoto,
-        customPhotos
+        customPhotos,
+        analytics,
+        visitorLogs,
+        recordVisitorAction,
+        resetAnalytics,
+        isAdminAuthenticated,
+        adminAuthModalOpen,
+        setAdminAuthModalOpen,
+        verifyAdminPassword,
+        lockAdmin
       }}
     >
       {children}

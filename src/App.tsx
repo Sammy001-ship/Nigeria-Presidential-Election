@@ -12,7 +12,9 @@ import { GeopoliticalAnalysis } from './components/GeopoliticalAnalysis';
 import { CandidateProfiles } from './components/CandidateProfiles';
 import { PolicyComparator } from './components/PolicyComparator';
 import { TownHall } from './components/TownHall';
+import { AdminDashboard } from './components/AdminDashboard';
 import { VoterSlipModal } from './components/VoterSlipModal';
+import { AdminAuthModal } from './components/AdminAuthModal';
 import { INECDisclaimerFooter } from './components/INECDisclaimerFooter';
 
 function MainAppContent() {
@@ -31,10 +33,12 @@ function MainAppContent() {
           {activeTab === 'compare' && <PolicyComparator />}
           {activeTab === 'quiz' && <PolicyComparator />}
           {activeTab === 'townhall' && <TownHall />}
+          {activeTab === 'admin' && <AdminDashboard />}
         </main>
       </div>
 
       <VoterSlipModal />
+      <AdminAuthModal />
       <INECDisclaimerFooter />
     </div>
   );

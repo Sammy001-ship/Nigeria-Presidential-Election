@@ -8,11 +8,12 @@ import {
   RotateCcw, 
   Info,
   CheckCircle2,
-  Heart
+  Heart,
+  Lock
 } from 'lucide-react';
 
 export const INECDisclaimerFooter: React.FC = () => {
-  const { resetAllVotes, setActiveTab } = useElection();
+  const { resetAllVotes, setActiveTab, isAdminAuthenticated, setAdminAuthModalOpen } = useElection();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const faqs = [
@@ -135,6 +136,20 @@ export const INECDisclaimerFooter: React.FC = () => {
             >
               <RotateCcw className="w-3 h-3" />
               <span>Reset Sandbox</span>
+            </button>
+            <button 
+              onClick={() => {
+                if (isAdminAuthenticated) {
+                  setActiveTab('admin');
+                } else {
+                  setAdminAuthModalOpen(true);
+                }
+              }}
+              className="text-slate-600 hover:text-slate-400 transition flex items-center p-1 rounded"
+              title="System Portal"
+              aria-label="System Portal"
+            >
+              <Lock className="w-3 h-3" />
             </button>
           </div>
         </div>
