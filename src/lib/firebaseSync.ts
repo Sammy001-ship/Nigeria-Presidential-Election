@@ -7,7 +7,6 @@ import {
   runTransaction,
   type Unsubscribe
 } from 'firebase/firestore';
-import { getDownloadURL, getStorage, ref, uploadString } from 'firebase/storage';
 import type { Comment, IssuePollOption } from '../types/election';
 import { INITIAL_STATE_VOTES, INITIAL_COMMENTS, TOP_ISSUES_POLL } from '../data/electionData';
 
@@ -33,7 +32,6 @@ const app = isFirebaseConfigured
   : null;
 const auth = app ? getAuth(app) : null;
 const firestore = app ? getFirestore(app) : null;
-const storage = app ? getStorage(app) : null;
 const sharedElectionRef = firestore ? doc(firestore, 'public', 'election') : null;
 
 const defaultSharedData: SharedElectionData = {
@@ -120,16 +118,4 @@ export async function updateSharedElection(
     }
     transaction.set(sharedElectionRef, update(current));
   });
-}
-
-export async function uploadCandidatePhoto(
-  candidateId: string,
-  dataUrl: string
-): Promise<string> {
-  if (!storage) throw new Error('Firebase Storage is not configured.');
-  await ensureAuthenticated();
-
-  const photoRef = ref(storage, `candidate-photos/${candidateId}`);
-  await uploadString(photoRef, dataUrl, 'data_url');
-  return getDownloadURL(photoRef);
 }

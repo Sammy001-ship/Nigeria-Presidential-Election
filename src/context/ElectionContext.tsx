@@ -4,8 +4,7 @@ import { CANDIDATES, NIGERIAN_STATES, INITIAL_STATE_VOTES, INITIAL_COMMENTS, TOP
 import {
   isFirebaseConfigured,
   subscribeToSharedElection,
-  updateSharedElection,
-  uploadCandidatePhoto
+  updateSharedElection
 } from '../lib/firebaseSync';
 
 export interface ConstitutionalCheckResult {
@@ -249,26 +248,16 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, [reportSyncError]);
 
   const updateCandidatePhoto = useCallback((candidateId: string, photoDataUrl: string) => {
-    if (isFirebaseConfigured) {
-      void uploadCandidatePhoto(candidateId, photoDataUrl)
-        .then(photoUrl => commitSharedData(current => ({
-          ...current,
-          customPhotos: { ...current.customPhotos, [candidateId]: photoUrl }
-        })).catch(() => undefined))
-        .catch(reportSyncError);
-      return;
-    }
-
     setCustomPhotos(prev => {
       const updated = { ...prev, [candidateId]: photoDataUrl };
       try {
         localStorage.setItem('naija_votes_custom_photos', JSON.stringify(updated));
       } catch {
-        // quota
+        reportSyncError(new Error('The candidate photo could not be saved in this browser. Storage may be full.'));
       }
       return updated;
     });
-  }, [commitSharedData, reportSyncError]);
+  }, [reportSyncError]);
 
   const candidates = useMemo(() => {
     return CANDIDATES.map(c => ({
@@ -321,7 +310,6 @@ export const ElectionProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setStateVotes(data.stateVotes);
         setComments(data.comments);
         setIssuePolls(data.issuePolls);
-        setCustomPhotos(data.customPhotos);
         if (!hasReceivedSharedData.current) {
           hasReceivedSharedData.current = true;
           setSyncStatus('connected');
